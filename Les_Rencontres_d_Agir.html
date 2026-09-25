@@ -1,0 +1,533 @@
+<!doctype html><html lang="fr"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found]){display:none!important}</style></head><body>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<title>Les Rencontres d'Agir</title>
+<style>
+  :root{
+    color-scheme: light;
+    --ground:#DEDEF7;
+    --ground-deep:#CBCBEE;
+    --paper:#FBFAFF;
+    --ink:#58122E;
+    --ink-soft:rgba(88,18,46,.72);
+    --ink-faint:rgba(88,18,46,.52);
+    --accent:#E2402A;
+    --rule:rgba(88,18,46,.16);
+    --rule-strong:rgba(88,18,46,.34);
+
+    --display:"Fraunces","Iowan Old Style",Georgia,"Times New Roman",serif;
+    --body:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif;
+    --mono:"IBM Plex Mono","SFMono-Regular",Menlo,Consolas,monospace;
+  }
+
+  body{
+    background:var(--ground);
+    color:var(--ink);
+    font-family:var(--body);
+    font-size:17px;
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .wrap{max-width:880px;margin:0 auto;padding:0 32px;}
+  .band{padding:72px 0;border-top:1px solid var(--rule);}
+  .band.paper{background:var(--paper);}
+  p{max-width:64ch;}
+
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:.17em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin:0 0 22px;
+    display:block;
+  }
+  .eyebrow.ink{color:var(--ink-faint);}
+  h1{
+    font-family:var(--display);
+    font-weight:700;
+    font-size:clamp(44px,7vw,80px);
+    line-height:.99;
+    letter-spacing:-.022em;
+    margin:0 0 26px;
+    text-wrap:balance;
+    max-width:15ch;
+  }
+  h2{
+    font-family:var(--display);
+    font-weight:700;
+    font-size:clamp(28px,3.9vw,42px);
+    line-height:1.07;
+    letter-spacing:-.018em;
+    margin:0 0 18px;
+    text-wrap:balance;
+    max-width:22ch;
+  }
+  h3{
+    font-family:var(--display);
+    font-weight:600;
+    font-size:24px;
+    line-height:1.18;
+    letter-spacing:-.012em;
+    margin:0 0 10px;
+  }
+  .lead{font-size:20px;line-height:1.55;color:var(--ink-soft);max-width:58ch;}
+  .small{font-size:15px;color:var(--ink-soft);}
+  strong{font-weight:600;}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;overflow:hidden;padding:88px 0 68px;background:var(--ground);}
+  .hero::before{
+    content:"";
+    position:absolute;
+    inset:-30% -20% auto -20%;
+    height:150%;
+    background:repeating-linear-gradient(
+      -7deg,
+      rgba(255,255,255,0) 0px,
+      rgba(255,255,255,.55) 3px,
+      rgba(255,255,255,0) 9px,
+      rgba(255,255,255,0) 26px
+    );
+    -webkit-mask-image:radial-gradient(120% 75% at 78% 42%, #000 0%, transparent 68%);
+    mask-image:radial-gradient(120% 75% at 78% 42%, #000 0%, transparent 68%);
+    opacity:.85;
+    pointer-events:none;
+  }
+  .hero .wrap{position:relative;}
+  .hero-meta{
+    display:flex;flex-wrap:wrap;gap:10px 26px;
+    font-family:var(--mono);font-size:12px;letter-spacing:.15em;text-transform:uppercase;
+    color:var(--ink-faint);margin-bottom:32px;
+  }
+  .hero-meta .now{color:var(--accent);}
+
+  /* ---------- sommaire ---------- */
+  .toc{margin-top:44px;border-top:2px solid var(--ink);}
+  .toc a{
+    display:grid;grid-template-columns:160px 1fr;gap:28px;align-items:baseline;
+    padding:14px 0;border-bottom:1px solid var(--rule);
+    text-decoration:none;color:var(--ink);
+  }
+  .toc a:hover{color:var(--accent);}
+  .toc a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
+  .toc .n{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);}
+  .toc .t{font-size:17px;font-weight:500;}
+
+  /* ---------- stats ---------- */
+  .stats{
+    display:grid;grid-template-columns:repeat(4,1fr);
+    gap:1px;background:var(--rule);
+    border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+    margin:38px 0 20px;
+  }
+  .stat{background:var(--paper);padding:22px 20px 24px;}
+  .band:not(.paper) .stat{background:var(--ground);}
+  .stat .n{
+    font-family:var(--display);font-weight:700;font-size:36px;line-height:1;
+    letter-spacing:-.02em;font-variant-numeric:tabular-nums;display:block;margin-bottom:8px;
+  }
+  .stat .l{font-size:13.5px;line-height:1.35;color:var(--ink-soft);}
+
+  .facts{margin:34px 0 0;padding:0;list-style:none;border-top:1px solid var(--rule);}
+  .facts li{
+    padding:14px 0;border-bottom:1px solid var(--rule);
+    display:grid;grid-template-columns:160px 1fr;gap:28px;align-items:baseline;font-size:16px;
+  }
+  .facts .k{font-family:var(--mono);font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-faint);}
+  .facts .v{color:var(--ink-soft);max-width:56ch;}
+
+  /* ---------- chantier ---------- */
+  .chantier{padding:58px 0;border-top:1px solid var(--rule-strong);}
+  .chantier:first-of-type{border-top:none;padding-top:6px;}
+  .chantier-head{display:grid;grid-template-columns:170px 1fr;gap:34px;align-items:start;}
+  .chantier-tag{
+    font-family:var(--mono);font-size:12px;letter-spacing:.15em;text-transform:uppercase;
+    color:var(--accent);padding-top:8px;line-height:1.7;
+  }
+  .chantier-tag span{display:block;color:var(--ink-faint);}
+
+  .items{margin:28px 0 0;padding:0;list-style:none;border-top:1px solid var(--rule);}
+  .items li{
+    padding:17px 0 18px;border-bottom:1px solid var(--rule);
+    display:grid;grid-template-columns:170px 1fr;gap:34px;align-items:baseline;
+  }
+  .items .k{font-weight:600;font-size:16px;line-height:1.35;}
+  .items .v{color:var(--ink-soft);font-size:16px;line-height:1.55;max-width:56ch;}
+
+  .sub{margin-top:32px;background:var(--paper);padding:28px 32px 30px;border-left:3px solid var(--ink);}
+  .band.paper .sub{background:var(--ground);}
+  .sub h3{margin-bottom:6px;}
+
+  /* ---------- timeline ---------- */
+  .tl{margin-top:34px;border-top:1px solid var(--rule);}
+  .tl-row{display:grid;grid-template-columns:200px 1fr;gap:34px;padding:24px 0;border-bottom:1px solid var(--rule);}
+  .tl-when{font-family:var(--mono);font-size:12.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);line-height:1.7;}
+  .tl-when span{display:block;color:var(--ink-faint);letter-spacing:.08em;}
+  .tick{margin:0;padding:0;list-style:none;}
+  .tick li{padding:3px 0 3px 20px;position:relative;font-size:16.5px;}
+  .tick li::before{content:"";position:absolute;left:0;top:14px;width:9px;height:1.5px;background:var(--accent);}
+
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:56px;}
+  .plain{margin:16px 0 0;padding:0;list-style:none;}
+  .plain li{padding:11px 0;border-bottom:1px solid rgba(255,255,255,.2);font-size:16.5px;line-height:1.5;}
+  .plain li:first-child{border-top:1px solid rgba(255,255,255,.2);}
+
+  .close{padding:78px 0 88px;background:var(--ink);color:#F5ECEF;}
+  .close h2,.close h3{color:#fff;}
+  .close p{color:rgba(245,236,239,.82);}
+  .close .eyebrow{color:#FF9B85;}
+  .close .tick li::before{background:#FF9B85;}
+
+  .note{font-size:14px;color:var(--ink-faint);margin-top:22px;max-width:60ch;}
+
+  @media (max-width:760px){
+    body{font-size:16px;}
+    .wrap{padding:0 22px;}
+    .band,.close,.hero{padding:52px 0;}
+    .stats{grid-template-columns:repeat(2,1fr);}
+    .chantier-head,.items li,.tl-row,.facts li,.toc a{grid-template-columns:1fr;gap:10px;}
+    .chantier-tag{padding-top:0;}
+    .two{grid-template-columns:1fr;gap:36px;}
+  }
+  @media print{
+    body{background:#fff;}
+    .hero::before{display:none;}
+    .band,.close,.chantier{page-break-inside:avoid;}
+  }
+</style>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-meta">
+      <span>Collectif AGIR — Aix-en-Provence</span>
+      <span>Proposition</span>
+      <span class="now">Septembre 2026</span>
+    </div>
+    <h1>Les Rencontres d'Agir</h1>
+    <p class="lead">Une émission vidéo tous les quinze jours. Un invité, une conversation, un sujet : les migrations, telles qu'on les étudie, qu'on les enseigne, qu'on les met en scène et qu'on les vit dans le Pays d'Aix.</p>
+
+    <nav class="toc">
+      <a href="#idee"><span class="n">L'idée</span><span class="t">Un espace d'échange pour le collectif</span></a>
+      <a href="#format"><span class="n">Le format</span><span class="t">Déroulé d'une rencontre et déclinaisons</span></a>
+      <a href="#invites"><span class="n">Les invités</span><span class="t">Une famille d'invités par pôle d'action</span></a>
+      <a href="#pistes"><span class="n">Pistes nouvelles</span><span class="t">Huit idées de rencontres moins évidentes</span></a>
+      <a href="#saison"><span class="n">Saison 1</span><span class="t">Novembre 2026 → juin 2027</span></a>
+      <a href="#moyens"><span class="n">Mise en œuvre</span><span class="t">Lieu, équipe, protocole, suivi</span></a>
+    </nav>
+  </div>
+</header>
+
+<section class="band paper" id="idee">
+  <div class="wrap">
+    <span class="eyebrow">L'idée</span>
+    <h2>Faire du collectif un lieu où l'on parle des migrations</h2>
+    <p>Le collectif agit sur l'hébergement, l'accompagnement, le français, la santé, l'emploi et la culture, avec des dizaines de partenaires. Chacune de ces actions croise des personnes qui ont quelque chose à dire sur les migrations : chercheurs, enseignants, artistes, soignants, juristes, hébergeurs, personnes accompagnées. Aucun espace ne permet aujourd'hui de les réunir et de faire entendre ces échanges au-delà du cercle des bénévoles.</p>
+    <p>Les Rencontres d'Agir proposent cet espace. Le collectif n'y sollicite pas de soutien : il invite, il pose des questions, il écoute. Il devient un lieu de conversation sur les migrations dans le Pays d'Aix.</p>
+
+    <div class="stats">
+      <div class="stat"><span class="n">1</span><span class="l">rencontre tous les quinze jours</span></div>
+      <div class="stat"><span class="n">16</span><span class="l">rencontres sur la première saison</span></div>
+      <div class="stat"><span class="n">30 min</span><span class="l">de conversation par épisode</span></div>
+      <div class="stat"><span class="n">4</span><span class="l">formats tirés de chaque tournage</span></div>
+    </div>
+
+    <ul class="facts">
+      <li><span class="k">Le principe</span><span class="v">Un invité, parfois deux, reçu par un animateur du collectif. Une conversation filmée, sans plateau ni décor de télévision, dans un lieu lié au sujet.</span></li>
+      <li><span class="k">Le terrain</span><span class="v">Aix-Marseille Université, la MMSH, l'IMéRA, Sciences Po Aix, le Site-mémorial du Camp des Milles, la Méjanes, le Bois de l'Aune : le Pays d'Aix concentre un nombre rare de personnes qui travaillent sur les migrations.</span></li>
+      <li><span class="k">Le vivier interne</span><span class="v">700 personnes accompagnées depuis 2015, plus de 50 pays d'origine, une trentaine d'associations membres, et une soixantaine d'anciens accompagnés du PREM aujourd'hui en situation professionnelle stable.</span></li>
+      <li><span class="k">Ce qui existe déjà</span><span class="v">Les podcasts réalisés avec Radio Zaï (« Les voix d'Agir », « Compagnons d'exil ») et le groupe « Témoignages » lancé le 23 septembre. Les Rencontres les prolongent en vidéo sans les remplacer.</span></li>
+      <li><span class="k">Le lien au programme</span><span class="v">L'émission mensuelle prévue au chantier 5 des Chantiers de communication, rendue régulière, filmée et ouverte à tous les pôles.</span></li>
+    </ul>
+    <p class="note">Sources : collectifagir.com, JeVeuxAider.gouv.fr, échanges internes du collectif (juin → septembre 2026), sites d'Aix-Marseille Université et du Camp des Milles.</p>
+  </div>
+</section>
+
+<section class="band" id="format">
+  <div class="wrap">
+    <span class="eyebrow ink">Le format</span>
+    <h2>Une rencontre, quatre usages</h2>
+    <p class="lead">Chaque tournage dure environ une heure et produit un épisode long, des extraits courts, une version audio et un texte.</p>
+
+    <div class="chantier">
+      <div class="chantier-head">
+        <div class="chantier-tag">Déroulé<span>30 minutes</span></div>
+        <div>
+          <h3>Le déroulé d'une rencontre</h3>
+          <p>Une structure fixe, reconnaissable d'un épisode à l'autre, qui laisse l'essentiel du temps à la conversation.</p>
+        </div>
+      </div>
+      <ul class="items">
+        <li><span class="k">Ouvrir sur un objet</span><span class="v">L'invité apporte un objet, une photo, un texte ou un son qui dit quelque chose de son lien aux migrations. Deux minutes pour entrer dans le sujet par le concret.</span></li>
+        <li><span class="k">Tenir la conversation</span><span class="v">Vingt minutes d'échange. Le parcours de l'invité, son travail, ce qu'il observe dans le Pays d'Aix.</span></li>
+        <li><span class="k">Faire le lien avec le collectif</span><span class="v">Cinq minutes sur ce que son travail rejoint dans l'action du collectif : un pôle, un atelier, une personne rencontrée.</span></li>
+        <li><span class="k">Poser la question d'un accompagné</span><span class="v">Une question enregistrée en amont par une personne accompagnée ou un bénévole, à visage découvert ou en voix seule.</span></li>
+        <li><span class="k">Passer le relais</span><span class="v">L'invité recommande la personne qu'il aimerait voir à la prochaine rencontre. La programmation s'alimente ainsi d'elle-même.</span></li>
+      </ul>
+    </div>
+
+    <div class="chantier">
+      <div class="chantier-head">
+        <div class="chantier-tag">Formes<span>Variantes</span></div>
+        <div>
+          <h3>Trois formes de rencontre</h3>
+          <p>Alterner les formes évite la répétition et permet de recevoir des personnes qui ne parleraient pas seules face caméra.</p>
+        </div>
+      </div>
+      <ul class="items">
+        <li><span class="k">Le face-à-face</span><span class="v">Un invité, un animateur. La forme de base, adaptée aux chercheurs, enseignants, écrivains et artistes.</span></li>
+        <li><span class="k">Le binôme</span><span class="v">Deux personnes liées par l'action du collectif : un hébergeur et la personne qu'il a hébergée, un accompagné et son référent, un élève de FLE et son enseignant. L'animateur s'efface, les deux se parlent.</span></li>
+        <li><span class="k">La rencontre publique</span><span class="v">Une fois par trimestre, enregistrée devant un public : au local, à la Méjanes, dans un théâtre ou chez un partenaire. Elle réunit adhérents, bénévoles et personnes extérieures au collectif.</span></li>
+      </ul>
+    </div>
+
+    <div class="chantier">
+      <div class="chantier-head">
+        <div class="chantier-tag">Diffusion<span>Déclinaisons</span></div>
+        <div>
+          <h3>Ce que chaque tournage produit</h3>
+          <p>Un seul tournage alimente tous les supports du collectif pendant deux semaines, jusqu'à la rencontre suivante.</p>
+        </div>
+      </div>
+      <ul class="items">
+        <li><span class="k">L'épisode long</span><span class="v">30 minutes, sur YouTube et sur le site du collectif, sous-titré en français.</span></li>
+        <li><span class="k">Trois extraits verticaux</span><span class="v">De 45 secondes à 1 minute, pour Instagram et Facebook. Le format « pastille » proposé par le groupe Témoignages.</span></li>
+        <li><span class="k">La version audio</span><span class="v">Publiée en podcast et proposée à Radio Zaï pour diffusion, dans la continuité des podcasts déjà réalisés ensemble.</span></li>
+        <li><span class="k">Un texte</span><span class="v">Une page pour Agir Infos : l'invité, trois idées fortes, une citation. Les meilleurs textes nourrissent le journal imprimé du chantier 1.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="band paper" id="invites">
+  <div class="wrap">
+    <span class="eyebrow">Les invités</span>
+    <h2>Une famille d'invités pour chaque pôle</h2>
+    <p class="lead">Chaque pôle du collectif ouvre sur un monde professionnel qui réfléchit aux migrations. Les Rencontres organisent le dialogue entre les deux.</p>
+
+    <div class="chantier">
+      <div class="chantier-head">
+        <div class="chantier-tag">Pôle FLE<span>Le français</span></div>
+        <div>
+          <h3>Ceux qui enseignent la langue</h3>
+          <p>Les bénévoles du FLE enseignent chaque semaine sans toujours avoir de lien avec ceux dont c'est le métier. La rencontre crée ce lien et peut déboucher sur des échanges de pratiques, des stages ou des formations.</p>
+        </div>
+      </div>
+      <ul class="items">
+        <li><span class="k">Enseignants de FLE d'Aix-Marseille Université</span><span class="v">Au Service universitaire des langues, qui porte le DU Passerelle « Étudiantes et étudiants en exil », et au département de FLE de la faculté ALLSH.</span></li>
+        <li><span class="k">Un étudiant du DU Passerelle</span><span class="v">En binôme avec son enseignant. Le dispositif accueille des personnes en exil qui reprennent des études, un débouché possible pour certaines personnes accompagnées.</span></li>
+        <li><span class="k">Étudiants de master FLE</span><span class="v">Qui cherchent des terrains de stage. Le collectif peut en être un, et la rencontre en fait la présentation.</span></li>
+        <li><span class="k">Un bénévole et un apprenant du collectif</span><span class="v">Ce que l'un a appris de l'autre, au-delà de la langue.</span></li>
+      </ul>
+    </div>
+
+    <div class="chantier">
+      <div class="chantier-head">
+        <div class="chantier-tag">Culture<span>Arts et scène</span></div>
+        <div>
+          <h3>Ceux qui mettent en scène et en images</h3>
+          <p>Les ateliers artistiques et le théâtre du collectif ont leurs équivalents professionnels à quelques rues. Recevoir ces artistes, c'est parler de leur travail et ouvrir des collaborations.</p>
+        </div>
+      </div>
+      <ul class="items">
+        <li><span class="k">Paul Pascot</span><span class="v">Metteur en scène de la compagnie Bon-qu'à-ça, installée au Patio du Bois de l'Aune. Son spectacle <em>Mastory</em> est né de neuf mois de travail avec des jeunes amateurs : une démarche proche de ce que fait l'atelier théâtre du collectif.</span></li>
+        <li><span class="k">Les brodeuses du voile</span><span class="v">Les participantes de l'atelier textile dont le voile, réunissant soixante paires de mains, a été exposé à la Méjanes puis à Gardanne.</span></li>
+        <li><span class="k">Le Théâtre du Bois de l'Aune</span><span class="v">Lieu de création de la Ville d'Aix, tourné vers les pratiques amateurs et les publics éloignés. Un partenaire possible pour une rencontre publique.</span></li>
+        <li><span class="k">Écrivains et traducteurs</span><span class="v">Auteurs de récits d'exil, et traducteurs qui font passer ces récits d'une langue à l'autre. La Fête du livre d'Aix et la Méjanes peuvent orienter vers eux.</span></li>
+        <li><span class="k">Musiciens</span><span class="v">Ceux qui jouent des répertoires venus avec les migrations, en Provence et en Méditerranée.</span></li>
+      </ul>
+    </div>
+
+    <div class="chantier">
+      <div class="chantier-head">
+        <div class="chantier-tag">Recherche<span>Comprendre</span></div>
+        <div>
+          <h3>Ceux qui étudient les migrations</h3>
+          <p>Aix concentre des laboratoires dont les migrations sont l'objet. Leurs chercheurs ont des résultats à partager et peu d'occasions de parler hors de l'université.</p>
+        </div>
+      </div>
+      <ul class="items">
+        <li><span class="k">La MMSH</span><span class="v">Maison méditerranéenne des sciences de l'homme, sur le campus d'Aix. Elle regroupe notamment le LAMES, dont la sociologie des migrations est un axe de recherche, et l'IREMAM, consacré au monde arabe et musulman.</span></li>
+        <li><span class="k">L'IMéRA</span><span class="v">L'institut d'études avancées d'Aix-Marseille Université, qui accueille en résidence des chercheurs et des artistes du monde entier.</span></li>
+        <li><span class="k">Sciences Po Aix</span><span class="v">Pour les politiques migratoires, le droit d'asile et le traitement médiatique des migrations.</span></li>
+        <li><span class="k">Le Camp des Milles</span><span class="v">Site-mémorial à Aix, titulaire avec Aix-Marseille Université d'une chaire UNESCO « Éducation à la citoyenneté, sciences de l'homme et convergence des mémoires ». Le Camp a lui-même interné des réfugiés étrangers entre 1939 et 1942.</span></li>
+        <li><span class="k">Des historiens du territoire</span><span class="v">Pour raconter les migrations qui ont déjà fait le Pays d'Aix : mineurs italiens et polonais du bassin de Gardanne, Arméniens, rapatriés et harkis, travailleurs maghrébins.</span></li>
+      </ul>
+    </div>
+
+    <div class="chantier">
+      <div class="chantier-head">
+        <div class="chantier-tag">Accompagnement<span>Droit et santé</span></div>
+        <div>
+          <h3>Ceux qui défendent et qui soignent</h3>
+          <p>Les démarches d'asile et la santé sont les sujets sur lesquels le public connaît le moins. Des professionnels peuvent les expliquer simplement.</p>
+        </div>
+      </div>
+      <ul class="items">
+        <li><span class="k">Un avocat en droit d'asile</span><span class="v">Du barreau d'Aix-en-Provence. Expliquer en trente minutes ce que traverse une personne entre l'OFPRA et la CNDA.</span></li>
+        <li><span class="k">Les associations de défense des droits</span><span class="v">Membres du collectif ou voisines : Ligue des droits de l'Homme, Cimade. Parler de ce qu'elles voient changer dans la loi et dans les pratiques.</span></li>
+        <li><span class="k">Un soignant de l'exil</span><span class="v">Médecin, infirmier ou psychologue qui reçoit des personnes exilées. Parler de ce que le parcours fait aux corps et aux esprits.</span></li>
+        <li><span class="k">Un ancien accompagné et son référent</span><span class="v">Revenir ensemble, des années après, sur le temps de l'accompagnement.</span></li>
+      </ul>
+    </div>
+
+    <div class="chantier">
+      <div class="chantier-head">
+        <div class="chantier-tag">Hébergement<span>Emploi</span></div>
+        <div>
+          <h3>Ceux qui ont ouvert leur porte, et ceux qui ont trouvé leur place</h3>
+          <p>Les parcours qui ont abouti sont la meilleure réponse aux idées reçues. Le collectif en connaît des dizaines.</p>
+        </div>
+      </div>
+      <ul class="items">
+        <li><span class="k">Anciens hébergeurs et hébergés</span><span class="v">En binôme, plusieurs années après. Ce que l'accueil a changé des deux côtés. Complète la série « Ouvrir sa porte » du chantier 4.</span></li>
+        <li><span class="k">Les anciens du PREM</span><span class="v">Parmi la soixantaine de personnes aujourd'hui en situation professionnelle stable, choisir celles qui souhaitent raconter leur parcours, avec la personne qui les a accompagnées.</span></li>
+        <li><span class="k">Des employeurs</span><span class="v">Artisans, commerçants, entreprises du Pays d'Aix qui ont embauché une personne accompagnée : pourquoi, comment, ce qu'ils en retiennent.</span></li>
+        <li><span class="k">Les structures d'insertion</span><span class="v">La Recyclerie du Pays d'Aix et les chantiers d'insertion qui emploient parfois des personnes accompagnées par le collectif.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="pistes">
+  <div class="wrap">
+    <span class="eyebrow ink">Pistes nouvelles</span>
+    <h2>Huit rencontres moins évidentes</h2>
+    <p class="lead">Des invités qu'on ne pense pas à recevoir spontanément, et qui renouvellent la façon de parler des migrations.</p>
+
+    <ul class="items">
+      <li><span class="k">Les enseignants des élèves allophones</span><span class="v">Dans les collèges et lycées de l'académie, des enseignants accueillent dans des classes spécifiques (UPE2A) les enfants arrivés récemment en France. Ce sont souvent les enfants des familles accompagnées. Leur métier rejoint directement celui des bénévoles du FLE.</span></li>
+      <li><span class="k">Les interprètes</span><span class="v">Bénévoles ou professionnels, ils accompagnent les rendez-vous médicaux, juridiques et administratifs. Personne ne les entend jamais, alors qu'ils sont au centre de chaque échange.</span></li>
+      <li><span class="k">Les chercheurs et artistes en exil</span><span class="v">Des universitaires et artistes contraints de quitter leur pays sont accueillis dans les établissements français, notamment par le programme national PAUSE. Se renseigner auprès de l'IMéRA et d'Aix-Marseille Université sur ceux qui résident à Aix.</span></li>
+      <li><span class="k">Les journalistes</span><span class="v">Marsactu, La Marseillaise, La Provence, France Bleu Provence : comment on choisit ses mots et ses images quand on parle des migrations, et ce que les lecteurs en retiennent.</span></li>
+      <li><span class="k">Les élus et maires des communes</span><span class="v">Du Pays d'Aix et d'Aigues, là où des familles ont été accueillies. Ce que l'accueil a changé dans un village, vu par celui ou celle qui l'administre.</span></li>
+      <li><span class="k">La rencontre inversée</span><span class="v">Une personne accompagnée tient le rôle d'animateur et interroge un chercheur, un élu ou un artiste. Une façon concrète de faire émerger une parole qui n'est pas seulement celle du témoignage.</span></li>
+      <li><span class="k">Les enfants</span><span class="v">Une classe de primaire qui a accueilli un camarade arrivé en cours d'année, avec son enseignant. Tourné avec l'accord de l'école et des parents.</span></li>
+      <li><span class="k">La cuisine</span><span class="v">Un cuisinier du Pays d'Aix et une personne accompagnée préparent ensemble un plat de son pays. La rencontre se tient en cuisine et rejoint la double page de recettes du journal imprimé.</span></li>
+    </ul>
+
+    <div class="sub">
+      <span class="eyebrow">Rencontres publiques</span>
+      <h3>Quatre lieux pour les enregistrements devant public</h3>
+      <p>Chaque rencontre publique se tient chez un partenaire, qui en assure la diffusion auprès de son propre public.</p>
+      <ul class="items" style="margin-top:20px">
+        <li><span class="k">Le Camp des Milles</span><span class="v">Un chercheur et un ancien accompagné, dans un lieu où des réfugiés ont été internés quatre-vingts ans plus tôt.</span></li>
+        <li><span class="k">La Méjanes</span><span class="v">Un écrivain ou un traducteur, en lien avec la collection de la bibliothèque. Le voile brodé y a déjà été exposé.</span></li>
+        <li><span class="k">Le Bois de l'Aune</span><span class="v">Paul Pascot et les participants de l'atelier théâtre du collectif, suivis d'une lecture ou d'une courte scène.</span></li>
+        <li><span class="k">L'université</span><span class="v">Un amphithéâtre du campus d'Aix, avec les enseignants et les étudiants du FLE et du DU Passerelle.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="band paper" id="saison">
+  <div class="wrap">
+    <span class="eyebrow">Saison 1</span>
+    <h2>Seize rencontres, de novembre à juin</h2>
+    <p>Une programmation indicative, calée sur les dates qui comptent pour le collectif. Chaque invité recommande le suivant, ce qui permet de compléter la saison au fil de l'eau.</p>
+    <div class="tl">
+      <div class="tl-row">
+        <div class="tl-when">Préparation<span>Octobre 2026</span></div>
+        <ul class="tick">
+          <li>Valider le format et le nom avec le comité de pilotage</li>
+          <li>Désigner un référent et un ou deux co-animateurs, dont une personne accompagnée</li>
+          <li>Constituer une liste de trente invités possibles, pôle par pôle</li>
+          <li>Tourner un épisode zéro, non diffusé, pour régler le dispositif</li>
+          <li>Se coordonner avec le groupe Témoignages et avec Radio Zaï</li>
+        </ul>
+      </div>
+      <div class="tl-row">
+        <div class="tl-when">Lancement<span>Novembre → décembre</span></div>
+        <ul class="tick">
+          <li>Rencontre 1 : un binôme hébergeur et hébergé, pour installer le ton de l'émission</li>
+          <li>Rencontre 2 : une enseignante de FLE d'Aix-Marseille Université et une bénévole du pôle FLE</li>
+          <li>Rencontre 3 : un chercheur de la MMSH sur les migrations en Méditerranée</li>
+          <li>Rencontre 4, publique : pour le 18 décembre, Journée internationale des migrants</li>
+        </ul>
+      </div>
+      <div class="tl-row">
+        <div class="tl-when">Hiver<span>Janvier → mars 2027</span></div>
+        <ul class="tick">
+          <li>Paul Pascot et l'atelier théâtre du collectif</li>
+          <li>Un avocat en droit d'asile du barreau d'Aix</li>
+          <li>Un ancien accompagné du PREM et son employeur</li>
+          <li>Un enseignant d'élèves allophones</li>
+          <li>Pendant la Semaine de la langue française, en mars : un étudiant du DU Passerelle et son enseignant</li>
+          <li>Rencontre publique à la Méjanes, avec un écrivain</li>
+        </ul>
+      </div>
+      <div class="tl-row">
+        <div class="tl-when">Printemps<span>Avril → juin 2027</span></div>
+        <ul class="tick">
+          <li>Un soignant de l'exil</li>
+          <li>Un historien des migrations en Pays d'Aix</li>
+          <li>Une rencontre inversée, animée par une personne accompagnée</li>
+          <li>Un journaliste</li>
+          <li>Une rencontre en cuisine</li>
+          <li>Rencontre publique au Camp des Milles pour le 20 juin, Journée mondiale des réfugiés, et bilan de la saison</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="moyens">
+  <div class="wrap">
+    <span class="eyebrow ink">Mise en œuvre</span>
+    <h2>Ce qu'une rencontre demande</h2>
+    <p class="lead">Un dispositif léger, pensé pour tenir sur la durée avec des bénévoles.</p>
+
+    <ul class="items">
+      <li><span class="k">Préparer</span><span class="v">Un appel de vingt minutes avec l'invité une semaine avant : son parcours, ce qu'il souhaite dire, l'objet qu'il apporte, les sujets qu'il préfère éviter.</span></li>
+      <li><span class="k">Tourner</span><span class="v">Deux caméras, deux micros-cravates, une lumière. Une heure sur place, installation comprise. Au local du collectif ou chez l'invité.</span></li>
+      <li><span class="k">Monter</span><span class="v">L'épisode long, les trois extraits et la version audio, livrés dans la semaine qui suit le tournage.</span></li>
+      <li><span class="k">Valider</span><span class="v">L'invité et le référent du collectif voient l'épisode avant diffusion.</span></li>
+      <li><span class="k">Protéger</span><span class="v">Appliquer le protocole de captation du socle. Toute personne accompagnée peut choisir d'apparaître en voix seule, de dos ou floutée, et peut retirer son accord à tout moment.</span></li>
+      <li><span class="k">Former</span><span class="v">Former deux à quatre bénévoles au tournage et à l'animation pour que l'émission ne dépende pas d'une seule personne.</span></li>
+    </ul>
+
+    <div class="sub">
+      <span class="eyebrow">Ce que le collectif y gagne</span>
+      <h3>Au-delà de la communication</h3>
+      <ul class="items" style="margin-top:20px">
+        <li><span class="k">Des partenariats</span><span class="v">Chaque invité est un contact durable : un stage FLE, une salle prêtée, une représentation, un conseil juridique.</span></li>
+        <li><span class="k">Une audience nouvelle</span><span class="v">Chaque invité diffuse l'épisode auprès de ses étudiants, de son public, de ses collègues. Le collectif touche au-delà de son public habituel, comme le groupe Témoignages le souhaite.</span></li>
+        <li><span class="k">Une archive</span><span class="v">Seize conversations par an, qui rejoignent la mémoire du collectif du chantier 6.</span></li>
+        <li><span class="k">Un appui aux dossiers</span><span class="v">Une action culturelle et d'éducation citoyenne régulière, documentée et chiffrée, à valoriser dans les demandes de subvention.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="close">
+  <div class="wrap">
+    <span class="eyebrow">Conditions et suivi</span>
+    <h2>Ce que le lancement suppose</h2>
+    <div class="two" style="margin-top:38px">
+      <div>
+        <h3>Côté collectif</h3>
+        <ul class="plain">
+          <li>Valider le principe et le nom de l'émission</li>
+          <li>Désigner un référent pour la programmation</li>
+          <li>Ouvrir le carnet d'adresses des pôles et des associations membres</li>
+          <li>Proposer des personnes accompagnées et des bénévoles volontaires</li>
+          <li>Mettre à disposition le local pour les tournages</li>
+          <li>Relayer chaque épisode sur le site, les réseaux et Agir Infos</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Suivi des effets</h3>
+        <p style="margin-bottom:14px">Relever quatre chiffres à la fin de chaque trimestre :</p>
+        <ul class="tick">
+          <li>Vues et écoutes des épisodes</li>
+          <li>Nouveaux abonnés sur les réseaux</li>
+          <li>Partenariats nés d'une rencontre</li>
+          <li>Personnes venues à une rencontre publique</li>
+        </ul>
+        <p class="small" style="color:rgba(245,236,239,.6);margin-top:20px">Premier point d'étape en février 2027, après huit rencontres.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body></html>
