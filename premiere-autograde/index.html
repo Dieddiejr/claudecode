@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Claude AutoGrade</title>
+  <link rel="stylesheet" href="css/panel.css">
+</head>
+<body>
+  <header>
+    <h1>Claude AutoGrade</h1>
+    <button id="toggle-settings" class="link" type="button">Clé API</button>
+  </header>
+
+  <section id="settings" class="card" hidden>
+    <label for="api-key">Clé API Anthropic</label>
+    <input id="api-key" type="password" placeholder="sk-ant-..." autocomplete="off" spellcheck="false">
+    <p class="hint">Enregistrée uniquement sur cet ordinateur. Crée une clé sur console.anthropic.com.</p>
+    <button id="save-key" type="button">Enregistrer</button>
+  </section>
+
+  <section class="card">
+    <label for="style">Style</label>
+    <select id="style">
+      <option value="naturel">Naturel (correction seule)</option>
+      <option value="cinema">Cinéma doux</option>
+      <option value="chaud">Chaud / fin de journée</option>
+      <option value="froid">Froid / moderne</option>
+      <option value="documentaire">Documentaire</option>
+      <option value="pop">Vif / réseaux sociaux</option>
+    </select>
+    <label for="notes">Précisions (facultatif)</label>
+    <textarea id="notes" rows="2" placeholder="Ex. : interview en intérieur, peau un peu rouge, garder le ciel bleu"></textarea>
+    <p class="hint">Sélectionne un ou plusieurs plans dans la timeline (sinon : le plan sous la tête de lecture).</p>
+    <button id="analyze" class="primary" type="button">Analyser les plans</button>
+  </section>
+
+  <p id="status" class="status" role="status"></p>
+
+  <section id="result" class="card" hidden>
+    <div class="row">
+      <select id="clip-picker" aria-label="Plan analysé"></select>
+    </div>
+    <div class="compare">
+      <figure><canvas id="before"></canvas><figcaption>Avant</figcaption></figure>
+      <figure><canvas id="after"></canvas><figcaption>Aperçu après</figcaption></figure>
+    </div>
+    <p class="hint">Aperçu approximatif : le rendu final est celui de Lumetri dans Premiere.</p>
+
+    <h2>Diagnostic</h2>
+    <p id="diagnostic"></p>
+    <p id="log-warning" class="warning" hidden>L'image ressemble à un profil log : applique d'abord la LUT de conversion de ta caméra (Lumetri &gt; Correction de base &gt; LUT d'entrée), puis relance l'analyse.</p>
+
+    <label for="intensity">Intensité : <span id="intensity-value">100 %</span></label>
+    <input id="intensity" type="range" min="0" max="150" step="5" value="100">
+
+    <table id="params"></table>
+
+    <details>
+      <summary>Pourquoi ces réglages ?</summary>
+      <p id="explanation"></p>
+    </details>
+
+    <div class="actions">
+      <button id="apply" class="primary" type="button">Appliquer dans Lumetri</button>
+      <button id="apply-all" type="button">Appliquer à tous</button>
+    </div>
+    <div class="actions">
+      <button id="reset" type="button">Remettre à zéro</button>
+      <button id="export-lut" type="button">Exporter en LUT .cube</button>
+    </div>
+  </section>
+
+  <script src="js/vendor/anthropic-sdk.js"></script>
+  <script src="js/grade-core.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
