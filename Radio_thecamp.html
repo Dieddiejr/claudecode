@@ -1,0 +1,379 @@
+<!doctype html><html lang="fr"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found]){display:none!important}</style></head><body>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<title>Radio thecamp</title>
+<style>
+  :root{
+    color-scheme: light;
+    --ground:#DEDEF7;
+    --ground-deep:#CBCBEE;
+    --paper:#FBFAFF;
+    --ink:#58122E;
+    --ink-soft:rgba(88,18,46,.72);
+    --ink-faint:rgba(88,18,46,.52);
+    --accent:#E2402A;
+    --rule:rgba(88,18,46,.16);
+    --rule-strong:rgba(88,18,46,.34);
+
+    --display:"Fraunces","Iowan Old Style",Georgia,"Times New Roman",serif;
+    --body:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif;
+    --mono:"IBM Plex Mono","SFMono-Regular",Menlo,Consolas,monospace;
+  }
+
+  body{
+    background:var(--ground);
+    color:var(--ink);
+    font-family:var(--body);
+    font-size:17px;
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .wrap{max-width:880px;margin:0 auto;padding:0 32px;}
+  .band{padding:72px 0;border-top:1px solid var(--rule);}
+  .band.paper{background:var(--paper);}
+  p{max-width:64ch;}
+
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:.17em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin:0 0 22px;
+    display:block;
+  }
+  .eyebrow.ink{color:var(--ink-faint);}
+  h1{
+    font-family:var(--display);
+    font-weight:700;
+    font-size:clamp(44px,7vw,80px);
+    line-height:.99;
+    letter-spacing:-.022em;
+    margin:0 0 26px;
+    text-wrap:balance;
+    max-width:15ch;
+  }
+  h2{
+    font-family:var(--display);
+    font-weight:700;
+    font-size:clamp(28px,3.9vw,42px);
+    line-height:1.07;
+    letter-spacing:-.018em;
+    margin:0 0 18px;
+    text-wrap:balance;
+    max-width:22ch;
+  }
+  h3{
+    font-family:var(--display);
+    font-weight:600;
+    font-size:24px;
+    line-height:1.18;
+    letter-spacing:-.012em;
+    margin:0 0 10px;
+  }
+  .lead{font-size:20px;line-height:1.55;color:var(--ink-soft);max-width:58ch;}
+  .small{font-size:15px;color:var(--ink-soft);}
+  strong{font-weight:600;}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;overflow:hidden;padding:88px 0 68px;background:var(--ground);}
+  .hero::before{
+    content:"";
+    position:absolute;
+    inset:-30% -20% auto -20%;
+    height:150%;
+    background:repeating-linear-gradient(
+      -7deg,
+      rgba(255,255,255,0) 0px,
+      rgba(255,255,255,.55) 3px,
+      rgba(255,255,255,0) 9px,
+      rgba(255,255,255,0) 26px
+    );
+    -webkit-mask-image:radial-gradient(120% 75% at 78% 42%, #000 0%, transparent 68%);
+    mask-image:radial-gradient(120% 75% at 78% 42%, #000 0%, transparent 68%);
+    opacity:.85;
+    pointer-events:none;
+  }
+  .hero .wrap{position:relative;}
+  .hero-meta{
+    display:flex;flex-wrap:wrap;gap:10px 26px;
+    font-family:var(--mono);font-size:12px;letter-spacing:.15em;text-transform:uppercase;
+    color:var(--ink-faint);margin-bottom:32px;
+  }
+  .hero-meta .now{color:var(--accent);}
+
+  /* ---------- sommaire ---------- */
+  .toc{margin-top:44px;border-top:2px solid var(--ink);}
+  .toc a{
+    display:grid;grid-template-columns:160px 1fr;gap:28px;align-items:baseline;
+    padding:14px 0;border-bottom:1px solid var(--rule);
+    text-decoration:none;color:var(--ink);
+  }
+  .toc a:hover{color:var(--accent);}
+  .toc a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
+  .toc .n{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);}
+  .toc .t{font-size:17px;font-weight:500;}
+
+  /* ---------- stats ---------- */
+  .stats{
+    display:grid;grid-template-columns:repeat(4,1fr);
+    gap:1px;background:var(--rule);
+    border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+    margin:38px 0 20px;
+  }
+  .stat{background:var(--paper);padding:22px 20px 24px;}
+  .band:not(.paper) .stat{background:var(--ground);}
+  .stat .n{
+    font-family:var(--display);font-weight:700;font-size:36px;line-height:1;
+    letter-spacing:-.02em;font-variant-numeric:tabular-nums;display:block;margin-bottom:8px;
+  }
+  .stat .l{font-size:13.5px;line-height:1.35;color:var(--ink-soft);}
+
+  .facts{margin:34px 0 0;padding:0;list-style:none;border-top:1px solid var(--rule);}
+  .facts li{
+    padding:14px 0;border-bottom:1px solid var(--rule);
+    display:grid;grid-template-columns:160px 1fr;gap:28px;align-items:baseline;font-size:16px;
+  }
+  .facts .k{font-family:var(--mono);font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-faint);}
+  .facts .v{color:var(--ink-soft);max-width:56ch;}
+
+  /* ---------- chantier ---------- */
+  .chantier{padding:58px 0;border-top:1px solid var(--rule-strong);}
+  .chantier:first-of-type{border-top:none;padding-top:6px;}
+  .chantier-head{display:grid;grid-template-columns:170px 1fr;gap:34px;align-items:start;}
+  .chantier-tag{
+    font-family:var(--mono);font-size:12px;letter-spacing:.15em;text-transform:uppercase;
+    color:var(--accent);padding-top:8px;line-height:1.7;
+  }
+  .chantier-tag span{display:block;color:var(--ink-faint);}
+
+  .items{margin:28px 0 0;padding:0;list-style:none;border-top:1px solid var(--rule);}
+  .items li{
+    padding:17px 0 18px;border-bottom:1px solid var(--rule);
+    display:grid;grid-template-columns:170px 1fr;gap:34px;align-items:baseline;
+  }
+  .items .k{font-weight:600;font-size:16px;line-height:1.35;}
+  .items .v{color:var(--ink-soft);font-size:16px;line-height:1.55;max-width:56ch;}
+
+  .sub{margin-top:32px;background:var(--paper);padding:28px 32px 30px;border-left:3px solid var(--ink);}
+  .band.paper .sub{background:var(--ground);}
+  .sub h3{margin-bottom:6px;}
+
+  /* ---------- timeline ---------- */
+  .tl{margin-top:34px;border-top:1px solid var(--rule);}
+  .tl-row{display:grid;grid-template-columns:200px 1fr;gap:34px;padding:24px 0;border-bottom:1px solid var(--rule);}
+  .tl-when{font-family:var(--mono);font-size:12.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);line-height:1.7;}
+  .tl-when span{display:block;color:var(--ink-faint);letter-spacing:.08em;}
+  .tick{margin:0;padding:0;list-style:none;}
+  .tick li{padding:3px 0 3px 20px;position:relative;font-size:16.5px;}
+  .tick li::before{content:"";position:absolute;left:0;top:14px;width:9px;height:1.5px;background:var(--accent);}
+
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:56px;}
+  .plain{margin:16px 0 0;padding:0;list-style:none;}
+  .plain li{padding:11px 0;border-bottom:1px solid rgba(255,255,255,.2);font-size:16.5px;line-height:1.5;}
+  .plain li:first-child{border-top:1px solid rgba(255,255,255,.2);}
+
+  .close{padding:78px 0 88px;background:var(--ink);color:#F5ECEF;}
+  .close h2,.close h3{color:#fff;}
+  .close p{color:rgba(245,236,239,.82);}
+  .close .eyebrow{color:#FF9B85;}
+  .close .tick li::before{background:#FF9B85;}
+
+  .note{font-size:14px;color:var(--ink-faint);margin-top:22px;max-width:60ch;}
+
+  @media (max-width:760px){
+    body{font-size:16px;}
+    .wrap{padding:0 22px;}
+    .band,.close,.hero{padding:52px 0;}
+    .stats{grid-template-columns:repeat(2,1fr);}
+    .chantier-head,.items li,.tl-row,.facts li,.toc a{grid-template-columns:1fr;gap:10px;}
+    .chantier-tag{padding-top:0;}
+    .two{grid-template-columns:1fr;gap:36px;}
+  }
+  @media print{
+    body{background:#fff;}
+    .hero::before{display:none;}
+    .band,.close,.chantier{page-break-inside:avoid;}
+  }
+</style>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-meta">
+      <span>thecamp — Aix-en-Provence, La Duranne</span>
+      <span>Proposition</span>
+      <span class="now">Octobre 2026</span>
+    </div>
+    <h1>Radio thecamp</h1>
+    <p class="lead">Chaque mois, des dirigeants, des chercheurs et des experts prennent la parole sur le campus. Ce qu'ils disent mérite de durer plus qu'une journée : une radio en ligne qui l'éditorialise, l'archive et l'ouvre aux entreprises du territoire.</p>
+
+    <nav class="toc">
+      <a href="#idee"><span class="n">L'idée</span><span class="t">Faire survivre ce qui se dit sur le campus</span></a>
+      <a href="#grille"><span class="n">La grille</span><span class="t">Quatre formats, un rendez-vous fixe</span></a>
+      <a href="#archive"><span class="n">L'archive</span><span class="t">Une mémoire écoutable de chaque conférence</span></a>
+      <a href="#pilote"><span class="n">Le pilote</span><span class="t">Un premier épisode sur un événement réel</span></a>
+      <a href="#saison"><span class="n">Saison 1</span><span class="t">Novembre 2026 → juin 2027</span></a>
+      <a href="#moyens"><span class="n">Mise en œuvre</span><span class="t">Ce que le lancement suppose</span></a>
+    </nav>
+  </div>
+</header>
+
+<section class="band paper" id="idee">
+  <div class="wrap">
+    <span class="eyebrow">L'idée</span>
+    <h2>Donner une durée de vie à ce qui se dit ici</h2>
+    <p>thecamp reçoit chaque mois des dizaines de conférences, de séminaires, de LEX et d'invités. Le campus communique bien sur ces événements : site à jour, communiqués repris par la presse régionale, LinkedIn actif. Mais une fois la salle vidée, la parole disparaît. Aucune archive éditorialisée, aucun flux que l'on puisse écouter après coup, aucun rendez-vous éditorial qui donne envie de revenir.</p>
+    <p>La radio ne remplace pas la communication existante : elle lui ajoute ce qui lui manque, une voix continue. Elle fait aussi écho à l'ambition d'ouvrir davantage le campus aux entreprises et aux dirigeants de la région : on peut écouter thecamp avant d'y venir.</p>
+
+    <div class="stats">
+      <div class="stat"><span class="n">1</span><span class="l">émission phare chaque semaine ou chaque quinzaine</span></div>
+      <div class="stat"><span class="n">4</span><span class="l">formats, pas plus</span></div>
+      <div class="stat"><span class="n">1 jour</span><span class="l">d'événement = un mois de programmation</span></div>
+      <div class="stat"><span class="n">∞</span><span class="l">durée de vie de l'archive</span></div>
+    </div>
+
+    <ul class="facts">
+      <li><span class="k">Le principe</span><span class="v">Une radio en ligne, sous la marque du campus, qui édite en audio (et en extraits vidéo) ce qui se passe et se dit à thecamp.</span></li>
+      <li><span class="k">La matière première</span><span class="v">Elle existe déjà : conférences, LEX, séminaires, Speed Meeting Business mensuel, formations du Training Hub, soirées ouvertes au public, clients et partenaires du campus. Il ne manque pas de contenu, il manque de captation.</span></li>
+      <li><span class="k">Le public</span><span class="v">Les dirigeants du territoire, les entreprises qui envisagent de venir se former ou d'organiser un événement, les alumni des programmes, la presse, les institutions.</span></li>
+      <li><span class="k">Ce qui existe déjà</span><span class="v">Le campus produit déjà des podcasts avec les acteurs de son écosystème : le format est connu, la radio lui donne un cadre régulier, une grille et une archive.</span></li>
+    </ul>
+    <p class="note">Sources : thecamp.fr, presse régionale (Made in Marseille, Nouvelles Publications, Presse Agence), échanges de septembre 2026.</p>
+  </div>
+</section>
+
+<section class="band" id="grille">
+  <div class="wrap">
+    <span class="eyebrow ink">La grille</span>
+    <h2>Quatre formats, un rendez-vous fixe</h2>
+    <p class="lead">Assez pour tenir une saison, assez peu pour être produisible sans équipe permanente. L'émission phare a un jour et une heure de publication fixes : c'est ce qui transforme une série d'épisodes en radio.</p>
+
+    <ul class="items">
+      <li><span class="k">L'invité du campus</span><span class="v">Émission phare, 25 à 30 minutes. Un dirigeant, un chercheur, un formateur, un client passé par thecamp. Un parcours, une idée, une question qu'il emporte. Même générique, même structure à chaque épisode.</span></li>
+      <li><span class="k">Le Speed Meeting en capsules</span><span class="v">Chaque mois, le rendez-vous des dirigeants (12h-14h, pitch d'une minute) produit une capsule par dirigeant présent. Le dirigeant repart avec son extrait, prêt à partager.</span></li>
+      <li><span class="k">L'amphi, en différé</span><span class="v">Les meilleures conférences et LEX, montées en 15 à 20 minutes : la substance, sans les temps morts. Une manière d'assister à ce qu'on a manqué.</span></li>
+      <li><span class="k">Le journal du campus</span><span class="v">Une courte chronique mensuelle : les nouveautés, les arrivées, les chantiers, dont le futur campus numérique Théodora. Le fil qui relie les épisodes.</span></li>
+    </ul>
+
+    <div class="sub">
+      <h3>Ce que chaque captation produit</h3>
+      <p>Un événement d'une journée alimente la radio pendant plusieurs semaines : l'épisode long, des extraits courts verticaux pour LinkedIn, une citation visuelle, un texte prêt à publier, un lien d'écoute et un player intégrable sur le site de l'organisateur ou de l'invité. Chaque invité devient un diffuseur.</p>
+    </div>
+  </div>
+</section>
+
+<section class="band paper" id="archive">
+  <div class="wrap">
+    <span class="eyebrow">L'archive</span>
+    <h2>Une mémoire écoutable du campus</h2>
+    <p class="lead">Dans deux ans, ce qui s'est dit ici sera encore accessible, classé et retrouvable.</p>
+
+    <ul class="items">
+      <li><span class="k">Classer par thème</span><span class="v">IA, souveraineté numérique, éducation, expertise comptable, industrie : chaque épisode porte un thème, un invité, une date, un lieu du campus.</span></li>
+      <li><span class="k">Transcrire et résumer</span><span class="v">Chaque épisode est accompagné d'une transcription et de trois idées fortes. L'archive devient consultable, et référencée sur le web.</span></li>
+      <li><span class="k">Servir de catalogue</span><span class="v">Une conférence archivée est une démonstration permanente de la qualité du campus, utile pour les équipes commerciales et pour les organisateurs qui hésitent à louer les lieux.</span></li>
+      <li><span class="k">Garder la mémoire</span><span class="v">À l'approche des dix ans du campus (fin 2027), l'archive rassemble les voix de ceux qui l'ont fait, et rend hommage à son fondateur, Frédéric Chevalier.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="band" id="pilote">
+  <div class="wrap">
+    <span class="eyebrow ink">Le pilote</span>
+    <h2>Un premier épisode, avant tout engagement</h2>
+    <p class="lead">Plutôt qu'une promesse, un livrable. Le pilote est produit sur un événement réel du campus.</p>
+
+    <div class="tl">
+      <div class="tl-row">
+        <div class="tl-when">Semaine 1<span>Choix</span></div>
+        <ul class="tick">
+          <li>Choisir ensemble un événement à venir : prochain Speed Meeting Business, une conférence, un LEX</li>
+          <li>Valider le nom de travail et la tonalité</li>
+          <li>Cadrer les consentements des intervenants</li>
+        </ul>
+      </div>
+      <div class="tl-row">
+        <div class="tl-when">Jour J<span>Captation</span></div>
+        <ul class="tick">
+          <li>Plateau audio léger (micros, carte son) et caméra sur trépied, discrets</li>
+          <li>Quatre à six interviews dans la même journée</li>
+          <li>Prises de son d'ambiance et extraits de prises de parole</li>
+        </ul>
+      </div>
+      <div class="tl-row">
+        <div class="tl-when">J + 2 à J + 7<span>Livraison</span></div>
+        <ul class="tick">
+          <li>Extraits courts sous 48 heures</li>
+          <li>Épisode complet, transcription et visuels sous 7 jours</li>
+          <li>Rendez-vous de restitution pour décider de la suite</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band paper" id="saison">
+  <div class="wrap">
+    <span class="eyebrow">Saison 1</span>
+    <h2>Novembre 2026 → juin 2027</h2>
+    <p class="lead">Une saison calée sur l'année du campus : environ vingt épisodes, une pause estivale, une relance à la rentrée.</p>
+
+    <div class="tl">
+      <div class="tl-row">
+        <div class="tl-when">Novembre<span>Lancement</span></div>
+        <ul class="tick">
+          <li>Pilote publié, habillage sonore, page d'écoute sur le site de thecamp</li>
+          <li>Premières invitations : clients et partenaires du campus</li>
+        </ul>
+      </div>
+      <div class="tl-row">
+        <div class="tl-when">Décembre → février<span>Rythme</span></div>
+        <ul class="tick">
+          <li>Un invité du campus par semaine ou par quinzaine</li>
+          <li>Une capsule Speed Meeting par mois</li>
+          <li>Les premières conférences en différé</li>
+        </ul>
+      </div>
+      <div class="tl-row">
+        <div class="tl-when">Mars → juin<span>Ouverture</span></div>
+        <ul class="tick">
+          <li>Épisodes consacrés aux entreprises de la région passées par le campus</li>
+          <li>Une captation publique sur une soirée ouverte au grand public</li>
+          <li>Point d'étape en février, bilan en juin</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="close" id="moyens">
+  <div class="wrap">
+    <span class="eyebrow">Mise en œuvre</span>
+    <h2>Ce que le lancement suppose</h2>
+    <div class="two" style="margin-top:38px">
+      <div>
+        <h3>Côté thecamp</h3>
+        <ul class="plain">
+          <li>Désigner un référent éditorial</li>
+          <li>Autoriser l'accès aux événements pour la captation</li>
+          <li>Faciliter la prise de contact avec les intervenants</li>
+          <li>Relayer chaque épisode sur le site et les réseaux du campus</li>
+          <li>Prévoir un espace calme pour les interviews</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Suivi des effets</h3>
+        <p style="margin-bottom:14px">Relever quatre chiffres chaque trimestre :</p>
+        <ul class="tick">
+          <li>Écoutes et vues des épisodes</li>
+          <li>Invités qui partagent leur épisode</li>
+          <li>Demandes d'organisateurs citant la radio</li>
+          <li>Visiteurs venus après avoir écouté</li>
+        </ul>
+        <p class="small" style="color:rgba(245,236,239,.6);margin-top:20px">Premier point d'étape en février 2027, après huit épisodes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body></html>
