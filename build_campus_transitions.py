@@ -1,12 +1,14 @@
 # Génère « Radio Campus Transitions - proposition Studio Récitales » (HTML) à partir du gabarit thecamp (CSS + photos).
 # Adapté de build_decks.py : les photos viennent du gabarit lui-même (le dossier d'origine n'est pas disponible)
 # et le hero « Transitions+ » est rendu avec Chromium headless (à la place de SNAP).
-# usage : python3 build_campus_transitions.py "<gabarit thecamp>.html" ["<sortie>.html"]
+# usage : python3 build_campus_transitions.py "<gabarit thecamp>.html" ["<sortie>.html" ["<sortie>.pdf"]]
+#   (le PDF est facultatif : 12 pages 16:9, ~4 Mo, prêt à être joint à un e-mail)
 import os,io,re,sys,base64,hashlib,subprocess,tempfile
-from PIL import Image
+from PIL import Image,ImageEnhance
 
 TPL=sys.argv[1] if len(sys.argv)>1 else 'Radio thecamp - proposition Studio Récitales.html'
 OUT=sys.argv[2] if len(sys.argv)>2 else 'Radio Campus Transitions - proposition Studio Récitales.html'
+PDF=sys.argv[3] if len(sys.argv)>3 else None
 CHROME=os.environ.get('CHROME','/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell')  # headless_shell : pas de barre de fenêtre, le viewport fait bien 1000×564
 
 # ---------- photos : seules celles sans marque visible (thecamp, WEF…) sont gardées ----------
@@ -24,14 +26,17 @@ POOL={k:Image.open(io.BytesIO(RAW[h])).convert('RGB') for k,h in KEYS.items()}
 
 # ---------- utilitaires ----------
 def uri(b,mime='image/jpeg'): return f'data:{mime};base64,'+base64.b64encode(b).decode()
-def photo(k,w,ar,cx=.5,cy=.5,z=1.0,q=82):
-    """Recadre la photo k au ratio ar (largeur/hauteur) : centre (cx,cy) en fraction de l'image, z = part de la zone maximale."""
+def photo(k,w,ar,cx=.5,cy=.5,z=1.0,q=82,fx=None):
+    """Recadre la photo k au ratio ar (largeur/hauteur) : centre (cx,cy) en fraction de l'image, z = part de la zone maximale.
+    fx='gray' (noir et blanc) ou 'dark' (assombri) : l'effet est cuit dans l'image, pas en CSS, pour un PDF léger."""
     im=POOL[k]; W,H=im.size
     if W/H>ar: bh=H; bw=H*ar
     else: bw=W; bh=W/ar
     bw*=z; bh*=z
     l=min(max(cx*W-bw/2,0),W-bw); t=min(max(cy*H-bh/2,0),H-bh)
     w=min(w,round(bw)); c=im.crop((round(l),round(t),round(l+bw),round(t+bh))).resize((w,round(w/ar)),Image.LANCZOS)
+    if fx=='gray': c=ImageEnhance.Contrast(c.convert('L')).enhance(1.05)
+    elif fx=='dark': c=ImageEnhance.Brightness(c).enhance(.72)
     b=io.BytesIO(); c.save(b,'JPEG',quality=q,optimize=True); return uri(b.getvalue())
 NOBREAK=['Fos-Berre','Château-Gombert','enseignants-chercheurs','enseignant-chercheur','rendez-vous']  # jamais coupés en fin de ligne
 def typo(s):
@@ -109,7 +114,7 @@ C=dict(slug='campus-transitions',file='Radio Campus Transitions',wm='Transitions
  l12=["La direction du campus et de Polytech Marseille","Un étudiant et un salarié en formation","Un industriel partenaire","Un entretien avec un enseignant-chercheur","Le technopôle de Château-Gombert"])
 
 # ---------- assemblage ----------
-CSS=tpl[tpl.index('<style>'):tpl.index('</style>')+8].replace('</style>','.title{text-wrap:balance}\n.bn .ph1 img{filter:brightness(.72)}\n</style>')
+CSS=tpl[tpl.index('<style>'):tpl.index('</style>')+8].replace('</style>','.title{text-wrap:balance}\n.ia .iph img,.bn .ph1 img{filter:none}\n</style>')
 
 def build(c):
     LG=f'<div class="lg" style="font-weight:700;font-size:1.3cqw;letter-spacing:.04em;align-self:flex-start">{c["tile"]}</div>'
@@ -154,13 +159,13 @@ def build(c):
 <div class="tile b"><div class="xl">Chaque semaine</div></div>
 </div>'''))
     S.append(slide('warm',c['t8'],f'''<div class="ia"><h3>{c["h8"]}</h3>
-<div class="iph"><img src="{photo('B',1000,25/19,.5,.5,1.0)}" alt=""></div><div class="sq">→</div>
+<div class="iph"><img src="{photo('B',1000,25/19,.5,.5,1.0,fx='gray')}" alt=""></div><div class="sq">→</div>
 <p>{c["p8"]}</p></div>'''))
     S.append(slide('dusk',c['t9'],f'''<div class="bn">
 <div class="k y1"><span>{c["y9"]}</span></div>
 <div class="k d1"><p>{c["d9"]}</p></div>
 <div class="k l1"></div>
-<div class="k ph1"><img src="{photo('F',1300,38/14,.55,.5,1.0)}" alt=""><span>{c["ph9"]}</span></div>
+<div class="k ph1"><img src="{photo('F',1300,38/14,.55,.5,1.0,fx='dark')}" alt=""><span>{c["ph9"]}</span></div>
 <div class="k g1"><span>{c["g9"]}</span></div>
 <div class="k p1"></div></div>'''))
     y10=c.get('y10') or D_S10_Y.format(who=c['who'])
@@ -195,4 +200,17 @@ def build(c):
     open(OUT,'w',encoding='utf-8').write(html)
     print(OUT,len(html)//1024,'Ko')
 
-if __name__=='__main__': build(C)
+# ---------- PDF : une slide = une page 1920×1080 (le CSS @media print du gabarit) ----------
+def to_pdf(html_path,pdf_path):
+    h=open(html_path,encoding='utf-8').read()
+    # le grain SVG du fond serait rastérisé en grosses images à chaque page (11 Mo → 4 Mo sans lui) : on ne garde que le dégradé
+    h=re.sub(r'url\("data:image/svg\+xml;utf8,[^"]*"\),','',h)
+    with tempfile.TemporaryDirectory() as d:
+        tp=os.path.join(d,'print.html'); open(tp,'w',encoding='utf-8').write(h)
+        subprocess.run([CHROME,'--no-sandbox','--disable-gpu','--no-pdf-header-footer','--virtual-time-budget=10000',
+                        f'--print-to-pdf={os.path.abspath(pdf_path)}','file://'+tp],check=True,capture_output=True)
+    print(pdf_path,os.path.getsize(pdf_path)//1024,'Ko')
+
+if __name__=='__main__':
+    build(C)
+    if PDF: to_pdf(OUT,PDF)
