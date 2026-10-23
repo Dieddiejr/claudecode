@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Prendre la parole — Laurence Leguérinel</title>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500&display=swap" rel="stylesheet">
+<link href="assets/logo-data.css" rel="stylesheet">
+<style>
+:root{
+  --sr-bg:#FFFFFF; --sr-sage:#C8CFBD;
+  --sr-green-grad:linear-gradient(180deg,#C6FBAE 0%,#E6FBD9 55%,#FBFDF8 100%);
+  --sr-green-ink:#14363A;   --sr-green-solid:#C6FBAE;
+  --sr-yellow-grad:linear-gradient(180deg,#FFF59A 0%,#FFF9CC 50%,#FFFDF2 100%);
+  --sr-yellow-ink:#8A4A1F;  --sr-yellow-solid:#FFF59A;
+  --sr-blue-grad:linear-gradient(180deg,#BFDCFF 0%,#E3EDFF 55%,#FCEFEF 100%);
+  --sr-blue-ink:#14213D;    --sr-blue-solid:#BFDCFF;
+  --sr-accent-hover:#2F7A63;
+  --sr-font-sans:'Schibsted Grotesk',system-ui,sans-serif;
+  --sr-track-tight:-0.035em;
+  --sr-radius-card:20px; --sr-radius-image:6px; --sr-radius-pill:999px;
+
+  /* Format fixe 1600 × 900 : proportions de la charte (3.5vh 2vw, 1.4vw, 3.4vh 2vw) */
+  --W:1600px; --H:900px;
+  --pad-y:32px; --pad-x:32px; --gap:22px; --card-py:31px; --card-px:32px;
+  --fs-display:84px; --fs-statement:42px; --fs-small:18px;
+}
+@page{size:1600px 900px;margin:0}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--sr-bg);font-family:var(--sr-font-sans);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+a{color:inherit;text-decoration:none}
+
+.page{width:var(--W);height:var(--H);overflow:hidden;padding:var(--pad-y) var(--pad-x);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gap);break-after:page;page-break-after:always}
+.page.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.page.wide{grid-template-columns:minmax(0,1fr) minmax(0,2fr)}
+.col{border-radius:var(--sr-radius-card);padding:var(--card-py) var(--card-px);display:flex;flex-direction:column;min-height:0}
+.green{background:var(--sr-green-grad);color:var(--sr-green-ink)}
+.yellow{background:var(--sr-yellow-grad);color:var(--sr-yellow-ink)}
+.blue{background:var(--sr-blue-grad);color:var(--sr-blue-ink)}
+.between{justify-content:space-between}
+.end{justify-content:flex-end}
+
+.logo{display:block;width:208px;aspect-ratio:3.093/1;background:no-repeat left center/contain}
+.logo-green{background-image:var(--sr-logo-green)} .logo-yellow{background-image:var(--sr-logo-yellow)} .logo-blue{background-image:var(--sr-logo-blue)}
+
+h1,h2{margin:0;font-weight:500;font-size:var(--fs-display);line-height:.98;letter-spacing:var(--sr-track-tight);text-wrap:balance}
+p.s{margin:0;font-weight:500;font-size:var(--fs-statement);line-height:1.02;letter-spacing:var(--sr-track-tight);text-wrap:pretty}
+p.s.para{font-size:31px;line-height:1.16}
+.small{font-size:var(--fs-small);font-weight:400;line-height:1.3;letter-spacing:-0.01em}
+.photo{width:100%;height:240px;margin-top:auto;object-fit:cover;border-radius:var(--sr-radius-image);display:block}
+.planche{width:100%;height:100%;object-fit:contain;object-position:center;border-radius:var(--sr-radius-image);display:block}
+.stack{display:flex;flex-direction:column;gap:14px}
+</style>
+</head>
+<body>
+
+<!-- 1 · Couverture -->
+<section class="page">
+  <div class="col green between">
+    <div class="logo logo-green" role="img" aria-label="Studio Récitales"></div>
+    <h1>Prendre la parole.</h1>
+  </div>
+  <div class="col yellow" style="gap:28px">
+    <p class="s">Une proposition de Studio Récitales pour Laurence Leguérinel.</p>
+    <img class="photo" src="assets/laurence.jpg" alt="Laurence Leguérinel" style="height:300px">
+  </div>
+  <div class="col blue end">
+    <p class="s">Un espace de parole sur LinkedIn, puis en photo et en vidéo.</p>
+  </div>
+</section>
+
+<!-- 2 · Ce que nous avons compris -->
+<section class="page two">
+  <div class="col yellow between">
+    <div class="logo logo-yellow" role="img" aria-label="Studio Récitales"></div>
+    <h2>Ce que nous avons compris.</h2>
+  </div>
+  <div class="col blue end">
+    <p class="s">Depuis plus de cinq ans, vous accompagnez les managers en prise de poste. Vous les aidez à trouver une posture qui leur ressemble et une communication efficace.</p>
+  </div>
+</section>
+
+<!-- 3 · Le constat -->
+<section class="page">
+  <div class="col blue between">
+    <div class="logo logo-blue" role="img" aria-label="Studio Récitales"></div>
+    <h2>Le constat.</h2>
+  </div>
+  <div class="col green">
+    <p class="s">Vous enseignez la communication. Votre propre parole, elle, reste discrète.</p>
+  </div>
+  <div class="col yellow end">
+    <p class="s">Confiez-nous le soin et la gestion de votre parole sur les réseaux. Nous voulons nous en occuper pour vous ainsi que de votre image dessus.</p>
+  </div>
+</section>
+
+<!-- 4 · Vos besoins -->
+<section class="page two">
+  <div class="col green between">
+    <div class="logo logo-green" role="img" aria-label="Studio Récitales"></div>
+    <h2>Vos besoins.</h2>
+  </div>
+  <div class="col yellow end">
+    <p class="s">Du temps, une régularité et une forme visuelle. Des contenus que vous pouvez signer sans avoir à les écrire seule.</p>
+  </div>
+</section>
+
+<!-- 5 · Comment nous pouvons vous accompagner -->
+<section class="page two">
+  <div class="col yellow between">
+    <div class="logo logo-yellow" role="img" aria-label="Studio Récitales"></div>
+    <h2>Comment nous pouvons vous accompagner.</h2>
+  </div>
+  <div class="col green between">
+    <p class="s para">On commence par LinkedIn. Chaque semaine, nous écrivons pour vous deux publications à partir de vos sujets et de vos mots, et nous les mettons en forme. Vous les relisez, vous changez ce que vous voulez, puis nous les publions. Dans un second temps, on organise une séance photo et le tournage de courtes vidéos, pour qu’on puisse aussi vous voir et vous entendre.</p>
+    <h2>100 € par mois.</h2>
+  </div>
+</section>
+
+<!-- 6 · Un exemple concret pour votre LinkedIn -->
+<section class="page wide">
+  <div class="col green between">
+    <div class="stack">
+      <div class="logo logo-green" role="img" aria-label="Studio Récitales"></div>
+    </div>
+    <div class="stack" style="gap:28px">
+      <p class="s">Deux publications par semaine, le mardi et le jeudi. Chaque texte est écrit à la première personne.</p>
+      <h2>Un exemple concret pour votre LinkedIn.</h2>
+    </div>
+  </div>
+  <div class="col blue" style="padding:40px">
+    <img class="planche" src="assets/planche.png" alt="Aperçu des douze publications LinkedIn">
+  </div>
+</section>
+
+<!-- 7 · Notre façon de travailler -->
+<section class="page">
+  <div class="col blue between">
+    <div class="logo logo-blue" role="img" aria-label="Studio Récitales"></div>
+    <h2>Notre façon de travailler.</h2>
+  </div>
+  <div class="col green">
+    <p class="s">Un entretien de trente minutes par mois. Nous enregistrons votre parole, nous en tirons les textes, vous validez.</p>
+  </div>
+  <div class="col yellow end">
+    <p class="s">Vous gardez la main sur chaque mot.</p>
+  </div>
+</section>
+
+<!-- 8 · Ensuite, l'image -->
+<section class="page">
+  <div class="col yellow between">
+    <div class="logo logo-yellow" role="img" aria-label="Studio Récitales"></div>
+    <h2>Ensuite, l’image.</h2>
+  </div>
+  <div class="col green">
+    <p class="s">Aujourd’hui, une seule photo vous représente. Une séance de portraits donnera une image à chaque sujet.</p>
+  </div>
+  <div class="col blue end" style="gap:14px">
+    <span class="small">Par exemple, pour « Une image ouvre ce que les mots retiennent. »</span>
+    <p class="s">Vous, filmée en train de poser les cartes Points of You® sur la table.</p>
+  </div>
+</section>
+
+<!-- 9 · Parlons-en -->
+<section class="page">
+  <div class="col green between">
+    <div class="logo logo-green" role="img" aria-label="Studio Récitales"></div>
+    <h2>Parlons-en.</h2>
+  </div>
+  <div class="col yellow end" style="gap:14px">
+    <span class="small">Téléphone</span>
+    <p class="s"><a href="tel:+33675146871">06 75 14 68 71</a></p>
+  </div>
+  <div class="col blue end" style="gap:14px">
+    <span class="small">Site</span>
+    <p class="s"><a href="https://studiorecitales.fr">studiorecitales.fr</a></p>
+  </div>
+</section>
+
+</body>
+</html>
