@@ -1,0 +1,369 @@
+<title>Bénéficiaires TA Bouches-du-Rhône</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Source+Sans+3:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout : bandeau de synthèse, puis carte du département + encart Marseille côte à côte, puis registre filtrable. */
+:root {
+  --bg: #f3f6f6; --surface: #ffffff; --ink: #14262c; --muted: #5b6d72; --line: #d5dfe0;
+  --sea: #d9e9ee; --land: #fbfcfb; --land-edge: #9fb3b7; --accent: #0d6a85;
+  --ok: #2f7d4a; --ok-bg: #dcefe1; --warn: #9a6a00; --warn-bg: #fbefc9; --risk: #a53a2c; --risk-bg: #f7dcd7;
+  --c1: #0d6a85; --c2: #5f8f2f; --c3: #7a4fb0; --c4: #c2410c; --c5: #b0306a; --c6: #1f8a8a; --c7: #8a6d1f; --c8: #4a5b8c;
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0f1a1d; --surface: #16252a; --ink: #e3ecee; --muted: #93a7ac; --line: #2a3d43;
+  --sea: #10303a; --land: #1b2c31; --land-edge: #47646b; --accent: #5cc0dc;
+  --ok: #7fd39b; --ok-bg: #1d3a28; --warn: #f0c45a; --warn-bg: #3a3017; --risk: #f19a8c; --risk-bg: #43221d;
+  --c1: #5cc0dc; --c2: #9fcf6a; --c3: #b896ea; --c4: #f5894f; --c5: #ec7fb0; --c6: #5fd0cf; --c7: #d9b85a; --c8: #92a6e0;
+  color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #0f1a1d; --surface: #16252a; --ink: #e3ecee; --muted: #93a7ac; --line: #2a3d43;
+  --sea: #10303a; --land: #1b2c31; --land-edge: #47646b; --accent: #5cc0dc;
+  --ok: #7fd39b; --ok-bg: #1d3a28; --warn: #f0c45a; --warn-bg: #3a3017; --risk: #f19a8c; --risk-bg: #43221d;
+  --c1: #5cc0dc; --c2: #9fcf6a; --c3: #b896ea; --c4: #f5894f; --c5: #ec7fb0; --c6: #5fd0cf; --c7: #d9b85a; --c8: #92a6e0;
+  color-scheme: dark; }
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.5; }
+.wrap { max-width: 1180px; margin: 0 auto; padding-block: 28px 56px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid; gap: 28px; }
+h1, h2 { font-family: var(--f-display); text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(1.6rem, 3.6vw, 2.4rem); line-height: 1.1; font-weight: 700; }
+h2 { font-size: 1.25rem; font-weight: 700; }
+.eyebrow { font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+header { display: grid; gap: 10px; }
+header p { margin: 0; max-width: 72ch; color: var(--muted); }
+.stats { display: flex; flex-wrap: wrap; gap: 10px; }
+.stat { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 10px 14px; min-width: 120px; display: grid; gap: 2px; }
+.stat b { font-family: var(--f-display); font-size: 1.6rem; line-height: 1; font-variant-numeric: tabular-nums; }
+.stat span { font-size: .82rem; color: var(--muted); }
+.notice { border-left: 4px solid var(--warn); background: var(--warn-bg); padding: 12px 16px; border-radius: 4px; max-width: 90ch; }
+.notice p { margin: 0; }
+.notice p + p { margin-top: 6px; }
+.maps { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 16px; }
+@media (max-width: 820px) { .maps { grid-template-columns: minmax(0, 1fr); } }
+figure { margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px; display: grid; gap: 8px; min-width: 0; }
+figcaption { font-size: .82rem; color: var(--muted); }
+svg { width: 100%; height: auto; display: block; }
+.sea { fill: var(--sea); }
+.land { fill: var(--land); stroke: var(--land-edge); stroke-width: 1.2; }
+.water { fill: var(--sea); stroke: var(--land-edge); stroke-width: .8; }
+.lbl { fill: var(--muted); font: 500 11px var(--f-body); }
+.lbl-sea { fill: var(--accent); font: italic 12px var(--f-body); opacity: .8; }
+.bubble { cursor: pointer; stroke: var(--surface); stroke-width: 1.5; }
+.bubble:hover, .bubble:focus { stroke: var(--ink); stroke-width: 2; outline: none; }
+.bubble.sel { stroke: var(--ink); stroke-width: 2.5; }
+.count { fill: #fff; font: 700 11px var(--f-body); pointer-events: none; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: .82rem; }
+.legend i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: -1px; }
+.controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.chip { font: 600 .82rem var(--f-body); border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 999px; padding: 5px 12px; cursor: pointer; }
+.chip[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.chip:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+input[type=search] { font: inherit; padding: 7px 12px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); color: var(--ink); min-width: 0; flex: 1 1 220px; }
+.reset { font: 600 .82rem var(--f-body); background: none; border: none; color: var(--accent); cursor: pointer; text-decoration: underline; padding: 4px; }
+.tablebox { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; }
+table { border-collapse: collapse; width: 100%; min-width: 860px; font-size: .9rem; }
+th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); font-weight: 600; position: sticky; top: 0; background: var(--surface); }
+tr:last-child td { border-bottom: none; }
+td .nom { font-weight: 600; }
+td .sub { color: var(--muted); font-size: .82rem; }
+.code { font-family: var(--f-mono); font-size: .82rem; white-space: nowrap; }
+.cat { display: inline-flex; align-items: center; gap: 6px; font-size: .82rem; }
+.cat i { width: 9px; height: 9px; border-radius: 50%; flex: none; }
+.fi { display: inline-block; font: 700 .75rem var(--f-body); border-radius: 4px; padding: 2px 7px; }
+.fi.A { background: var(--ok-bg); color: var(--ok); }
+.fi.B { background: var(--warn-bg); color: var(--warn); }
+.fi.C { background: var(--risk-bg); color: var(--risk); }
+a { color: var(--accent); }
+.empty { padding: 24px; color: var(--muted); text-align: center; }
+.cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 16px; display: grid; gap: 8px; align-content: start; min-width: 0; }
+.panel ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; }
+.panel p { margin: 0; }
+.key { display: grid; gap: 6px; font-size: .88rem; }
+@media (prefers-reduced-motion: no-preference) { .bubble { transition: r .2s, opacity .2s; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Solde de la taxe d'apprentissage · campagne 2026 · Bouches-du-Rhône</span>
+    <h1>Organismes non publics bénéficiaires de la taxe d'apprentissage dans le 13</h1>
+    <p>Associations, fondations et établissements privés du département qui perçoivent ou sollicitent le solde (13 %) de la taxe d'apprentissage via SOLTéA, classés selon l'article L6241-5 du Code du travail.</p>
+  </header>
+
+  <div class="stats" id="stats"></div>
+
+  <div class="notice">
+    <p><strong>Recensement reconstitué, à consolider avec la liste officielle.</strong> La liste préfectorale PACA 2026 (arrêté du 26/05/2026, complément au 24/07/2026) et la plateforme SOLTéA n'étaient pas accessibles au moment du recensement. Les fiches proviennent des pages publiques des organismes et d'annuaires (Onisep, L'Etudiant, enseignement-prive.info).</p>
+    <p>La fiabilité de chaque fiche est notée <span class="fi A">A</span> collecte affichée par l'organisme, <span class="fi B">B</span> statut éligible mais inscription SOLTéA non vérifiée, <span class="fi C">C</span> à confirmer.</p>
+  </div>
+
+  <section class="maps" aria-label="Cartes">
+    <figure>
+      <svg id="map13" viewBox="0 0 640 430" role="img" aria-label="Carte schématique des Bouches-du-Rhône"></svg>
+      <figcaption>Carte schématique : un cercle par commune, taille proportionnelle au nombre d'organismes. Cliquez pour filtrer le registre.</figcaption>
+    </figure>
+    <figure>
+      <svg id="mapMrs" viewBox="0 0 360 330" role="img" aria-label="Encart Marseille par arrondissement"></svg>
+      <figcaption>Encart Marseille, par arrondissement. « Marseille » sans arrondissement : siège ou adresse non confirmée.</figcaption>
+    </figure>
+  </section>
+
+  <div class="legend" id="legend"></div>
+
+  <section style="display:grid;gap:12px" aria-label="Registre">
+    <h2 id="regTitle">Registre</h2>
+    <div class="controls">
+      <input type="search" id="q" placeholder="Rechercher un nom, une commune, un UAI…" aria-label="Rechercher">
+      <span class="eyebrow" style="margin-left:4px">Fiabilité</span>
+      <button class="chip" data-fi="A" aria-pressed="false">A</button>
+      <button class="chip" data-fi="B" aria-pressed="false">B</button>
+      <button class="chip" data-fi="C" aria-pressed="false">C</button>
+      <button class="reset" id="reset" hidden>Tout afficher</button>
+    </div>
+    <div class="controls" id="catChips"></div>
+    <div class="tablebox">
+      <table>
+        <thead><tr><th>Organisme</th><th>Catégorie</th><th>Commune</th><th>UAI / SIRET</th><th>Fiab.</th><th>Source</th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+      <div class="empty" id="empty" hidden>Aucun organisme ne correspond. Élargissez la recherche ou cliquez sur « Tout afficher ».</div>
+    </div>
+  </section>
+
+  <section class="cols">
+    <div class="panel">
+      <h2>Qui peut percevoir le solde</h2>
+      <div class="key">
+        <p>Article L6241-5 du Code du travail, pour la part non publique :</p>
+        <ul>
+          <li>2° lycées privés sous contrat (formations technologiques et professionnelles), dont enseignement agricole privé et MFR</li>
+          <li>5°-6° enseignement supérieur privé à but non lucratif (EESPIG) et écoles sanitaires et sociales</li>
+          <li>7° établissements médico-sociaux pour jeunes handicapés</li>
+          <li>8° écoles de production</li>
+          <li>9° écoles de la deuxième chance et structures d'insertion</li>
+          <li>10° organismes d'orientation et de promotion des métiers (listes nationale et régionale)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="panel">
+      <h2>Exclus du périmètre</h2>
+      <ul id="exclus"></ul>
+    </div>
+    <div class="panel">
+      <h2>Pour un recensement exhaustif</h2>
+      <p>Téléchargez la liste préfectorale PACA 2026 (XLSX) sur le site de la préfecture de région, puis lancez <span class="code">filtrer_liste_officielle.py</span> fourni avec ce recensement : il ne garde que les organismes non publics du 13.</p>
+      <p>Calendrier 2026 : fléchage SOLTéA du 26 mai au 21 août, puis du 3 septembre au 21 octobre. La fenêtre est close depuis le 21 octobre.</p>
+      <p><a href="https://www.prefectures-regions.gouv.fr/provence-alpes-cote-dazur/Region-et-institutions/L-action-de-l-Etat/Education-enseignement-superieur-et-recherche/Education-enseignement-superieur/Taxe-d-apprentissage-TA-campagne-2026">Page TA 2026 de la préfecture PACA</a></p>
+    </div>
+  </section>
+</div>
+
+<script>
+const DATA = {"organismes": [{"id": "1", "nom": "Lycée technologique privé Sully", "categorie": "Lycée privé sous contrat", "base_legale": "L6241-5 2°", "gestionnaire_statut": "Privé sous contrat d'association", "adresse": "", "cp": "", "commune": "Marseille", "uai": "0131398Z", "siret": "", "fiabilite": "A", "source": "https://www.ltpsully.com/espace-entreprises/taxe-dapprentissage/", "note": "Se déclare habilité au solde TA (UAI publié). Arrondissement non confirmé.", "lat": 43.29868, "lon": 5.38712}, {"id": "2", "nom": "Lycée Marie Gasquet (Provence Formation)", "categorie": "Lycée privé sous contrat", "base_legale": "L6241-5 2°", "gestionnaire_statut": "Association Provence Formation (loi 1901)", "adresse": "", "cp": "13012", "commune": "Marseille 12e", "uai": "0133474F", "siret": "78291199400047", "fiabilite": "A", "source": "https://www.provence-formation.fr/entreprise/la-taxe-dapprentissage-a-provence-formation/", "note": "UAI et SIRET publiés par l'association pour le fléchage SOLTéA.", "lat": 43.30251, "lon": 5.44343}, {"id": "3", "nom": "Lycée Caucadis (Provence Formation)", "categorie": "Lycée privé sous contrat", "base_legale": "L6241-5 2°", "gestionnaire_statut": "Association Provence Formation (loi 1901)", "adresse": "", "cp": "", "commune": "Vitrolles", "uai": "0133424B", "siret": "78291199400088", "fiabilite": "A", "source": "https://www.provence-formation.fr/entreprise/la-taxe-dapprentissage-a-provence-formation/", "note": "Lycée des métiers.", "lat": 43.46108, "lon": 5.2488}, {"id": "4", "nom": "Lycée Célony (Provence Formation)", "categorie": "Lycée privé sous contrat", "base_legale": "L6241-5 2°", "gestionnaire_statut": "Association Provence Formation (loi 1901)", "adresse": "4 bis avenue de Lattre de Tassigny", "cp": "13090", "commune": "Aix-en-Provence", "uai": "0133425C", "siret": "78291199400062", "fiabilite": "A", "source": "https://www.provence-formation.fr/entreprise/la-taxe-dapprentissage-a-provence-formation/", "note": "", "lat": 43.5262, "lon": 5.44148}, {"id": "5", "nom": "Lycée Le Rocher (Provence Formation)", "categorie": "Lycée privé sous contrat", "base_legale": "L6241-5 2°", "gestionnaire_statut": "Association Provence Formation (loi 1901)", "adresse": "", "cp": "", "commune": "Salon-de-Provence", "uai": "0131485U", "siret": "78291199400070", "fiabilite": "A", "source": "https://www.provence-formation.fr/entreprise/la-taxe-dapprentissage-a-provence-formation/", "note": "", "lat": 43.64182, "lon": 5.09236}, {"id": "6", "nom": "Lycée Charlotte Grawitz (cité par Provence Formation)", "categorie": "Lycée privé sous contrat", "base_legale": "L6241-5 2°", "gestionnaire_statut": "À vérifier (cité sur la page TA de Provence Formation)", "adresse": "", "cp": "", "commune": "Marseille", "uai": "0131445A", "siret": "", "fiabilite": "C", "source": "https://www.provence-formation.fr/entreprise/la-taxe-dapprentissage-a-provence-formation/", "note": "Statut juridique non précisé par la source : vérifier s'il s'agit d'un établissement public partenaire.", "lat": 43.29228, "lon": 5.3807}, {"id": "7", "nom": "Lycée Edmond Rostand (cité par Provence Formation)", "categorie": "Lycée privé sous contrat", "base_legale": "L6241-5 2°", "gestionnaire_statut": "À vérifier (cité sur la page TA de Provence Formation)", "adresse": "", "cp": "", "commune": "Marseille", "uai": "0132193N", "siret": "", "fiabilite": "C", "source": "https://www.provence-formation.fr/entreprise/la-taxe-dapprentissage-a-provence-formation/", "note": "Statut juridique non précisé par la source : vérifier s'il s'agit d'un établissement public partenaire.", "lat": 43.2966, "lon": 5.37806}, {"id": "8", "nom": "Lycées professionnel et technologique privés Don Bosco", "categorie": "Lycée privé sous contrat", "base_legale": "L6241-5 2°", "gestionnaire_statut": "Privé catholique sous contrat", "adresse": "78 rue Stanislas Torrents", "cp": "13006", "commune": "Marseille 6e", "uai": "", "siret": "", "fiabilite": "A", "source": "https://donbosco-marseille.fr/accueil/relations-entreprises/taxe-dapprentissage/", "note": "Page de collecte TA active. Filières STI2D, bac pro, CAP.", "lat": 43.28275, "lon": 5.37778}, {"id": "9", "nom": "ORT Marseille – Lycée Léon Bramson (LGT + LP)", "categorie": "Lycée privé sous contrat", "base_legale": "L6241-5 2°", "gestionnaire_statut": "Association ORT France, sous contrat", "adresse": "", "cp": "13010", "commune": "Marseille 10e", "uai": "0133334D / 0131424C", "siret": "", "fiabilite": "A", "source": "https://ort-france.fr/la-gazette-de-ort/taxe-dapprentissage-un-geste-local-pour-preparer-les-competences-de-demain/", "note": "UAI tirés d'une brochure TA 2020 : à revérifier.", "lat": 43.27722, "lon": 5.42565}, {"id": "10", "nom": "Lycée professionnel privé Alexandre Gueidon", "categorie": "Lycée privé sous contrat", "base_legale": "L6241-5 2°", "gestionnaire_statut": "Privé catholique sous contrat", "adresse": "18 boulevard Gueidon", "cp": "13013", "commune": "Marseille 13e", "uai": "", "siret": "", "fiabilite": "B", "source": "https://www.enseignement-prive.info/onglet/professionnel/bouches-du-rhone-13", "note": "Vente, gestion.", "lat": 43.35382, "lon": 5.42503}, {"id": "11", "nom": "Lycée professionnel privé Saint-Henri", "categorie": "Lycée privé sous contrat", "base_legale": "L6241-5 2°", "gestionnaire_statut": "Privé sous contrat", "adresse": "37 chemin de Bernex", "cp": "13016", "commune": "Marseille 16e", "uai": "", "siret": "", "fiabilite": "B", "source": "https://www.enseignement-prive.info/onglet/professionnel/bouches-du-rhone-13", "note": "CAP et bac pro.", "lat": 43.35967, "lon": 5.31415}, {"id": "12", "nom": "Lycée professionnel Saint-Michel", "categorie": "Lycée privé sous contrat", "base_legale": "L6241-5 2°", "gestionnaire_statut": "Privé sous contrat", "adresse": "75 rue Saint-Savournin", "cp": "13005", "commune": "Marseille 5e", "uai": "", "siret": "", "fiabilite": "B", "source": "https://www.letudiant.fr/lycee/annuaire-des-lycees/ville-marseille.html", "note": "", "lat": 43.29604, "lon": 5.39473}, {"id": "13", "nom": "Lycée polyvalent Saint-Vincent de Paul", "categorie": "Lycée privé sous contrat", "base_legale": "L6241-5 2°", "gestionnaire_statut": "Privé catholique sous contrat", "adresse": "30 rue Stanislas Torrents", "cp": "13006", "commune": "Marseille 6e", "uai": "", "siret": "", "fiabilite": "B", "source": "https://www.enseignement-prive.info/onglet/lycee/technologique/bouches-du-rhone-13", "note": "STMG, STL, ST2S.", "lat": 43.28557, "lon": 5.37937}, {"id": "14", "nom": "Lycée privé polyvalent Belsunce", "categorie": "Lycée privé sous contrat", "base_legale": "L6241-5 2°", "gestionnaire_statut": "Privé sous contrat", "adresse": "rue Fauchier", "cp": "13002", "commune": "Marseille 2e", "uai": "", "siret": "", "fiabilite": "B", "source": "https://www.enseignement-prive.info/onglet/lycee/technologique/bouches-du-rhone-13", "note": "Lycée d'enseignement technologique.", "lat": 43.31673, "lon": 5.37135}, {"id": "15", "nom": "Lycée polyvalent Pastré – Grande Bastide", "categorie": "Lycée privé sous contrat", "base_legale": "L6241-5 2°", "gestionnaire_statut": "Privé sous contrat", "adresse": "", "cp": "13009", "commune": "Marseille 9e", "uai": "", "siret": "", "fiabilite": "B", "source": "https://www.enseignement-prive.info/onglet/lycee/bouches-du-rhone-13", "note": "", "lat": 43.24431, "lon": 5.43447}, {"id": "16", "nom": "École Modèle d'Électronique (lycée polyvalent)", "categorie": "Lycée privé sous contrat", "base_legale": "L6241-5 2°", "gestionnaire_statut": "Privé", "adresse": "233 boulevard Saint-Marcel", "cp": "13011", "commune": "Marseille 11e", "uai": "", "siret": "", "fiabilite": "B", "source": "https://etablissements.pass-education.fr/lycees/bouches-du-rhone/prive/", "note": "Filière professionnelle électronique.", "lat": 43.29331, "lon": 5.48003}, {"id": "17", "nom": "Lycée Charles Péguy", "categorie": "Lycée privé sous contrat", "base_legale": "L6241-5 2°", "gestionnaire_statut": "Privé catholique sous contrat", "adresse": "rue Sylvabelle", "cp": "13006", "commune": "Marseille 6e", "uai": "", "siret": "", "fiabilite": "B", "source": "https://www.enseignement-prive.info/onglet/professionnel/bouches-du-rhone-13", "note": "Bac pro commerce et gestion-administration.", "lat": 43.28459, "lon": 5.38266}, {"id": "18", "nom": "Lycée Chevreul – Blancarde", "categorie": "Lycée privé sous contrat", "base_legale": "L6241-5 2°", "gestionnaire_statut": "Privé catholique sous contrat", "adresse": "55 avenue de Lattre de Tassigny", "cp": "13004", "commune": "Marseille 4e", "uai": "", "siret": "", "fiabilite": "B", "source": "https://www.letudiant.fr/lycee/annuaire-des-lycees/ville-marseille.html", "note": "Arrondissement 4e ou 9e selon les annuaires.", "lat": 43.30927, "lon": 5.4025}, {"id": "19", "nom": "Lycée Saint-Joseph les Maristes", "categorie": "Lycée privé sous contrat", "base_legale": "L6241-5 2°", "gestionnaire_statut": "Privé catholique sous contrat", "adresse": "", "cp": "13006", "commune": "Marseille 6e", "uai": "", "siret": "", "fiabilite": "B", "source": "https://www.enseignementsup-recherche.gouv.fr/sites/default/files/annexe-liste-des-formations-initiales-de-l-enseignement-sup-rieur-priv--36677.pdf", "note": "Formations post-bac recensées (annexe Parcoursup).", "lat": 43.28471, "lon": 5.38162}, {"id": "20", "nom": "Lycée Sainte-Trinité", "categorie": "Lycée privé sous contrat", "base_legale": "L6241-5 2°", "gestionnaire_statut": "Privé catholique sous contrat", "adresse": "", "cp": "13009", "commune": "Marseille 9e", "uai": "", "siret": "", "fiabilite": "C", "source": "https://www.letudiant.fr/lycee/annuaire-des-lycees/ville-marseille.html", "note": "Vérifier la présence de filières technologiques ou professionnelles.", "lat": 43.24133, "lon": 5.42948}, {"id": "21", "nom": "Lycée Notre-Dame de la Viste", "categorie": "Lycée privé sous contrat", "base_legale": "L6241-5 2°", "gestionnaire_statut": "Privé catholique sous contrat", "adresse": "", "cp": "13015", "commune": "Marseille 15e", "uai": "", "siret": "", "fiabilite": "C", "source": "https://www.letudiant.fr/lycee/annuaire-des-lycees/ville-marseille.html", "note": "Vérifier la présence de filières technologiques ou professionnelles.", "lat": 43.36206, "lon": 5.36184}, {"id": "22", "nom": "Lycée Lacordaire", "categorie": "Lycée privé sous contrat", "base_legale": "L6241-5 2°", "gestionnaire_statut": "Privé catholique sous contrat", "adresse": "7 boulevard Lacordaire", "cp": "13013", "commune": "Marseille 13e", "uai": "", "siret": "", "fiabilite": "C", "source": "https://www.letudiant.fr/lycee/annuaire-des-lycees/ville-marseille.html", "note": "Vérifier la présence de filières technologiques ou professionnelles.", "lat": 43.34555, "lon": 5.42426}, {"id": "23", "nom": "Lycée catholique Sévigné", "categorie": "Lycée privé sous contrat", "base_legale": "L6241-5 2°", "gestionnaire_statut": "Privé catholique sous contrat", "adresse": "1 avenue de Saint-Jérôme", "cp": "13013", "commune": "Marseille 13e", "uai": "", "siret": "", "fiabilite": "C", "source": "https://www.letudiant.fr/lycee/annuaire-des-lycees/ville-marseille.html", "note": "Vérifier la présence de filières technologiques ou professionnelles.", "lat": 43.35096, "lon": 5.42514}, {"id": "24", "nom": "Lycée Saint-Charles (Camas)", "categorie": "Lycée privé sous contrat", "base_legale": "L6241-5 2°", "gestionnaire_statut": "Privé catholique sous contrat", "adresse": "", "cp": "13005", "commune": "Marseille 5e", "uai": "", "siret": "", "fiabilite": "C", "source": "https://www.letudiant.fr/lycee/annuaire-des-lycees/ville-marseille.html", "note": "Adresse divergente selon les annuaires.", "lat": 43.29031, "lon": 5.40077}, {"id": "25", "nom": "Lycée Notre-Dame de Sion", "categorie": "Lycée privé sous contrat", "base_legale": "L6241-5 2°", "gestionnaire_statut": "Privé catholique sous contrat", "adresse": "231 rue Paradis", "cp": "13006", "commune": "Marseille 6e", "uai": "", "siret": "", "fiabilite": "C", "source": "https://www.letudiant.fr/lycee/annuaire-des-lycees/ville-marseille.html", "note": "Vérifier la présence de filières technologiques ou professionnelles.", "lat": 43.28878, "lon": 5.38014}, {"id": "26", "nom": "Lycée Notre-Dame de France", "categorie": "Lycée privé sous contrat", "base_legale": "L6241-5 2°", "gestionnaire_statut": "Privé catholique", "adresse": "rue Théophile Décanis", "cp": "13006", "commune": "Marseille 6e", "uai": "", "siret": "", "fiabilite": "C", "source": "https://www.enseignement-prive.info/onglet/lycee/marseille-13000", "note": "", "lat": 43.2829, "lon": 5.38458}, {"id": "27", "nom": "Cours Bastide", "categorie": "Lycée privé sous contrat", "base_legale": "L6241-5 2°", "gestionnaire_statut": "Privé sous contrat", "adresse": "", "cp": "13006", "commune": "Marseille 6e", "uai": "", "siret": "", "fiabilite": "C", "source": "https://www.letudiant.fr/lycee/annuaire-des-lycees/ville-marseille.html", "note": "", "lat": 43.28706, "lon": 5.38546}, {"id": "28", "nom": "Lycée Paul Melizan", "categorie": "Lycée privé sous contrat", "base_legale": "L6241-5 2°", "gestionnaire_statut": "Privé catholique sous contrat", "adresse": "", "cp": "13011", "commune": "Marseille 11e", "uai": "", "siret": "", "fiabilite": "C", "source": "https://www.letudiant.fr/lycee/annuaire-des-lycees/ville-marseille.html", "note": "", "lat": 43.28563, "lon": 5.48695}, {"id": "29", "nom": "Lycée Jeanne Perrimond", "categorie": "Lycée privé sous contrat", "base_legale": "L6241-5 2°", "gestionnaire_statut": "Privé catholique sous contrat", "adresse": "", "cp": "13007", "commune": "Marseille 7e", "uai": "", "siret": "", "fiabilite": "C", "source": "https://www.letudiant.fr/lycee/annuaire-des-lycees/ville-marseille.html", "note": "", "lat": 43.28325, "lon": 5.36431}, {"id": "30", "nom": "Lycée Ibn Khaldoun", "categorie": "Lycée privé sous contrat", "base_legale": "L6241-5 2°", "gestionnaire_statut": "Privé sous contrat", "adresse": "", "cp": "13015", "commune": "Marseille 15e", "uai": "", "siret": "", "fiabilite": "C", "source": "https://www.letudiant.fr/lycee/annuaire-des-lycees/ville-marseille.html", "note": "", "lat": 43.35888, "lon": 5.3619}, {"id": "31", "nom": "Lycée Yavné", "categorie": "Lycée privé sous contrat", "base_legale": "L6241-5 2°", "gestionnaire_statut": "Privé confessionnel sous contrat", "adresse": "", "cp": "13013", "commune": "Marseille 13e", "uai": "", "siret": "", "fiabilite": "C", "source": "https://www.letudiant.fr/lycee/annuaire-des-lycees/ville-marseille.html", "note": "", "lat": 43.35461, "lon": 5.42953}, {"id": "32", "nom": "Lycée de Provence", "categorie": "Lycée privé sous contrat", "base_legale": "L6241-5 2°", "gestionnaire_statut": "Privé sous contrat", "adresse": "42 boulevard Émile Sicard", "cp": "13008", "commune": "Marseille 8e", "uai": "", "siret": "", "fiabilite": "C", "source": "https://etablissements.pass-education.fr/lycees/bouches-du-rhone/prive/", "note": "Surtout général et CPGE : éligibilité à confirmer.", "lat": 43.2481, "lon": 5.37509}, {"id": "33", "nom": "Lycée polyvalent Saint-Éloi", "categorie": "Lycée privé sous contrat", "base_legale": "L6241-5 2°", "gestionnaire_statut": "Privé catholique sous contrat", "adresse": "9 avenue Jules Isaac", "cp": "13100", "commune": "Aix-en-Provence", "uai": "", "siret": "", "fiabilite": "B", "source": "https://www.letudiant.fr/lycee/annuaire-des-lycees/ville-aix-en-provence.html", "note": "", "lat": 43.53251, "lon": 5.44121}, {"id": "34", "nom": "Lycée du Sacré-Cœur", "categorie": "Lycée privé sous contrat", "base_legale": "L6241-5 2°", "gestionnaire_statut": "Privé catholique sous contrat", "adresse": "29 rue Manuel", "cp": "13100", "commune": "Aix-en-Provence", "uai": "", "siret": "", "fiabilite": "C", "source": "https://www.enseignement-prive.info/fiche/lycee-prive-catholique-du-sacre-coeur-aix-en-provence/ET013-166", "note": "", "lat": 43.52878, "lon": 5.44719}, {"id": "35", "nom": "Lycée Sainte-Catherine de Sienne", "categorie": "Lycée privé sous contrat", "base_legale": "L6241-5 2°", "gestionnaire_statut": "Privé catholique sous contrat (AEDOM)", "adresse": "20 rue Mignet", "cp": "13100", "commune": "Aix-en-Provence", "uai": "", "siret": "", "fiabilite": "C", "source": "https://saintecatherineaix.fr/", "note": "Lycée général uniquement : éligibilité peu probable.", "lat": 43.53325, "lon": 5.44983}, {"id": "36", "nom": "Lycée La Nativité", "categorie": "Lycée privé sous contrat", "base_legale": "L6241-5 2°", "gestionnaire_statut": "Privé catholique sous contrat", "adresse": "8 rue Jean Andréani", "cp": "13090", "commune": "Aix-en-Provence", "uai": "", "siret": "", "fiabilite": "C", "source": "https://www.letudiant.fr/lycee/annuaire-des-lycees/ville-aix-en-provence.html", "note": "Lycée général : éligibilité peu probable.", "lat": 43.52737, "lon": 5.45241}, {"id": "37", "nom": "Lycée Viala Lacoste", "categorie": "Lycée privé sous contrat", "base_legale": "L6241-5 2°", "gestionnaire_statut": "Privé sous contrat", "adresse": "", "cp": "", "commune": "Salon-de-Provence", "uai": "", "siret": "", "fiabilite": "B", "source": "https://www.letudiant.fr/lycee/annuaire-des-lycees/ville-salon-de-provence.html", "note": "", "lat": 43.64253, "lon": 5.10153}, {"id": "38", "nom": "Lycée Saint-Jean", "categorie": "Lycée privé sous contrat", "base_legale": "L6241-5 2°", "gestionnaire_statut": "Privé sous contrat", "adresse": "", "cp": "", "commune": "Salon-de-Provence", "uai": "", "siret": "", "fiabilite": "B", "source": "https://www.letudiant.fr/lycee/annuaire-des-lycees/ville-salon-de-provence.html", "note": "Formations post-bac recensées.", "lat": 43.63818, "lon": 5.10136}, {"id": "39", "nom": "Lycée professionnel Jeanne d'Arc", "categorie": "Lycée privé sous contrat", "base_legale": "L6241-5 2°", "gestionnaire_statut": "Privé", "adresse": "5 chemin Saint-Roch", "cp": "", "commune": "Arles", "uai": "", "siret": "", "fiabilite": "B", "source": "https://etablissements.pass-education.fr/lycees/bouches-du-rhone/prive/", "note": "Statut de contrat à confirmer.", "lat": 43.6798, "lon": 4.638}, {"id": "40", "nom": "Lycée professionnel Brise-Lames", "categorie": "Lycée privé sous contrat", "base_legale": "L6241-5 2°", "gestionnaire_statut": "Privé", "adresse": "", "cp": "", "commune": "Martigues", "uai": "", "siret": "", "fiabilite": "B", "source": "https://www.letudiant.fr/lycee/annuaire-des-lycees/departement-bouches-du-rhone.html", "note": "Statut de contrat à confirmer.", "lat": 43.40643, "lon": 5.05247}, {"id": "41", "nom": "Lycée Saint-Jean de Garguier", "categorie": "Lycée privé sous contrat", "base_legale": "L6241-5 2°", "gestionnaire_statut": "Privé", "adresse": "chemin du Puits", "cp": "13420", "commune": "Gémenos", "uai": "", "siret": "", "fiabilite": "B", "source": "https://etablissements.pass-education.fr/lycees/bouches-du-rhone/prive/", "note": "", "lat": 43.29196, "lon": 5.63335}, {"id": "42", "nom": "Lycée Sainte-Marie", "categorie": "Lycée privé sous contrat", "base_legale": "L6241-5 2°", "gestionnaire_statut": "Privé catholique", "adresse": "13 rue Jeu de Ballon", "cp": "", "commune": "Aubagne", "uai": "", "siret": "", "fiabilite": "B", "source": "https://www.1001ecolesprivees.fr/annuaire/3-lycees/dep:13", "note": "Filière technologique.", "lat": 43.29233, "lon": 5.57266}, {"id": "43", "nom": "LEAP Fontlongue (lycée d'enseignement agricole privé)", "categorie": "Enseignement agricole privé", "base_legale": "L6241-5 2°", "gestionnaire_statut": "Privé catholique (CNEAP), sous contrat Agriculture", "adresse": "boulevard Théodore Aubanel", "cp": "13140", "commune": "Miramas", "uai": "0131690S", "siret": "", "fiabilite": "B", "source": "https://www.onisep.fr/ressources/structures-enseignement/provence-alpes-cote-d-azur/bouches-du-rhone/lycee-d-enseignement-prive-agricole-fontlongue", "note": "BTSA, bac pro horticulture/paysage/SAPAT.", "lat": 43.57818, "lon": 5.00203}, {"id": "44", "nom": "MFR de Barbentane", "categorie": "Enseignement agricole privé", "base_legale": "L6241-5 2°", "gestionnaire_statut": "Association MFR, sous contrat Agriculture", "adresse": "", "cp": "", "commune": "Barbentane", "uai": "", "siret": "", "fiabilite": "B", "source": "https://www.mfrprovence.fr/page-129-mfr-des-bouches-du-rhone--mfr-rousset.html", "note": "", "lat": 43.90241, "lon": 4.74315}, {"id": "45", "nom": "MFR de La Roque-d'Anthéron", "categorie": "Enseignement agricole privé", "base_legale": "L6241-5 2°", "gestionnaire_statut": "Association MFR, sous contrat Agriculture", "adresse": "", "cp": "", "commune": "La Roque-d'Anthéron", "uai": "", "siret": "", "fiabilite": "B", "source": "https://www.mfrprovence.fr/page-129-mfr-des-bouches-du-rhone--mfr-rousset.html", "note": "Restauration, pâtisserie, jardinage.", "lat": 43.71269, "lon": 5.30503}, {"id": "46", "nom": "MFR d'Eyragues", "categorie": "Enseignement agricole privé", "base_legale": "L6241-5 2°", "gestionnaire_statut": "Association MFR, sous contrat Agriculture", "adresse": "Domaine de Beauchamp, 164 draille Beauchamp", "cp": "13630", "commune": "Eyragues", "uai": "", "siret": "", "fiabilite": "B", "source": "https://www.pagesjaunes.fr/annuaire/departement/bouches-du-rhone-13/maisons-familiales-rurales", "note": "", "lat": 43.84169, "lon": 4.84137}, {"id": "47", "nom": "MFR de Puyloubier", "categorie": "Enseignement agricole privé", "base_legale": "L6241-5 2°", "gestionnaire_statut": "Association MFR, sous contrat Agriculture", "adresse": "", "cp": "13114", "commune": "Puyloubier", "uai": "", "siret": "", "fiabilite": "B", "source": "https://www.pagesjaunes.fr/annuaire/departement/bouches-du-rhone-13/maisons-familiales-rurales", "note": "", "lat": 43.52027, "lon": 5.67273}, {"id": "48", "nom": "MFR Rhône-Alpilles", "categorie": "Enseignement agricole privé", "base_legale": "L6241-5 2°", "gestionnaire_statut": "Association MFR, sous contrat Agriculture", "adresse": "", "cp": "", "commune": "Saint-Martin-de-Crau", "uai": "", "siret": "", "fiabilite": "B", "source": "https://www.onisep.fr/ressources/structures-enseignement/provence-alpes-cote-d-azur/bouches-du-rhone/maison-familiale-rurale-rhone-alpilles", "note": "CAP, CAPa.", "lat": 43.64088, "lon": 4.81089}, {"id": "49", "nom": "MFR de Lambesc", "categorie": "Enseignement agricole privé", "base_legale": "L6241-5 2°", "gestionnaire_statut": "Association MFR, sous contrat Agriculture", "adresse": "", "cp": "", "commune": "Lambesc", "uai": "", "siret": "", "fiabilite": "B", "source": "https://www.mfrprovence.fr/page-129-mfr-des-bouches-du-rhone--mfr-rousset.html", "note": "", "lat": 43.649, "lon": 5.26076}, {"id": "50", "nom": "MFR de Rousset", "categorie": "Enseignement agricole privé", "base_legale": "L6241-5 2°", "gestionnaire_statut": "Association MFR, sous contrat Agriculture", "adresse": "", "cp": "", "commune": "Rousset", "uai": "", "siret": "", "fiabilite": "B", "source": "https://www.mfrprovence.fr/page-129-mfr-des-bouches-du-rhone--mfr-rousset.html", "note": "", "lat": 43.48698, "lon": 5.6253}, {"id": "51", "nom": "KEDGE Business School – campus Marseille", "categorie": "Supérieur privé non lucratif", "base_legale": "L6241-5 5°/6°", "gestionnaire_statut": "Association, EESPIG", "adresse": "Domaine de Luminy", "cp": "13009", "commune": "Marseille 9e", "uai": "0130239P", "siret": "", "fiabilite": "A", "source": "https://entreprise.kedge.edu/actualites-entreprise-de-kedge/choisir-kedge-sur-soltea", "note": "Campagne SOLTéA 2026 active (établissement principal à Bordeaux).", "lat": 43.24451, "lon": 5.43442}, {"id": "52", "nom": "ISEN Méditerranée (JUNIA) – campus Marseille", "categorie": "Supérieur privé non lucratif", "base_legale": "L6241-5 5°/6°", "gestionnaire_statut": "Association, EESPIG", "adresse": "", "cp": "13013", "commune": "Marseille 13e", "uai": "0134415D", "siret": "", "fiabilite": "A", "source": "https://isen-mediterranee.fr/en/taxe-dapprentissage/", "note": "Se déclare habilité au solde TA.", "lat": 43.35288, "lon": 5.43008}, {"id": "53", "nom": "ESAIP – campus Aix-en-Provence", "categorie": "Supérieur privé non lucratif", "base_legale": "L6241-5 5°/6°", "gestionnaire_statut": "Association, EESPIG", "adresse": "", "cp": "", "commune": "Aix-en-Provence", "uai": "0132246A", "siret": "", "fiabilite": "B", "source": "https://www.enseignementsup-recherche.gouv.fr/sites/default/files/annexe-liste-des-formations-initiales-de-l-enseignement-sup-rieur-priv--36677.pdf", "note": "Statut EESPIG confirmé par l'annexe ministérielle.", "lat": 43.52773, "lon": 5.44972}, {"id": "54", "nom": "Institut universitaire Saint-Luc (IUSL)", "categorie": "Supérieur privé non lucratif", "base_legale": "L6241-5 5°/6°", "gestionnaire_statut": "Diocèse d'Aix et Arles", "adresse": "Maison diocésaine", "cp": "", "commune": "Aix-en-Provence", "uai": "", "siret": "", "fiabilite": "C", "source": "https://www.catho-aixarles.fr/diocese/se-former/iusl/", "note": "Formation ecclésiale : éligibilité à confirmer.", "lat": 43.53388, "lon": 5.44198}, {"id": "55", "nom": "IRTS PACA-Corse – site Marseille 8e", "categorie": "Formation sanitaire et sociale", "base_legale": "L6241-5 6°", "gestionnaire_statut": "Association loi 1901", "adresse": "", "cp": "13008", "commune": "Marseille 8e", "uai": "0130202Z", "siret": "", "fiabilite": "B", "source": "https://www.onisep.fr/ressources/structures-enseignement/provence-alpes-cote-d-azur/bouches-du-rhone/institut-regional-du-travail-social-paca-corse-site-marseille-8e", "note": "DEES, DEASS, DEEJE, DEETS.", "lat": 43.24916, "lon": 5.3741}, {"id": "56", "nom": "IRFSS Croix-Rouge PACA-Corse – IFSI Marseille", "categorie": "Formation sanitaire et sociale", "base_legale": "L6241-5 6°", "gestionnaire_statut": "Association Croix-Rouge française", "adresse": "", "cp": "13006", "commune": "Marseille", "uai": "", "siret": "", "fiabilite": "A", "source": "https://irfss-pacac.croix-rouge.fr/taxe-d-apprentissage", "note": "Page de collecte TA. Sites rue Sainte-Victoire (6e) et Parc Eiffel des Aygalades (14e).", "lat": 43.29966, "lon": 5.37779}, {"id": "57", "nom": "IFSI Saint-Jacques (Fondation Hôpital Saint-Joseph)", "categorie": "Formation sanitaire et sociale", "base_legale": "L6241-5 6°", "gestionnaire_statut": "Fondation privée non lucrative", "adresse": "", "cp": "13008", "commune": "Marseille 8e", "uai": "", "siret": "", "fiabilite": "C", "source": "https://prepa-connect.com/ifsi-a-marseille/", "note": "Rattachement et habilitation à confirmer.", "lat": 43.24775, "lon": 5.37942}, {"id": "58", "nom": "IRSAM – Institut régional des sourds et aveugles (IRS de Provence)", "categorie": "Établissement médico-social", "base_legale": "L6241-5 7°", "gestionnaire_statut": "Association IRSAM", "adresse": "", "cp": "", "commune": "Marseille", "uai": "0131688P / 0131429H", "siret": "", "fiabilite": "A", "source": "https://www.irsam.fr/taxe-dapprentissage-2026-parlez-en-a-vos-proches/", "note": "Campagne 2026 active, UAI publiés.", "lat": 43.29993, "lon": 5.37971}, {"id": "59", "nom": "ARI – Association régionale pour l'intégration", "categorie": "Établissement médico-social", "base_legale": "L6241-5 7°", "gestionnaire_statut": "Association (plus de 50 établissements 13/84/04)", "adresse": "", "cp": "", "commune": "Marseille", "uai": "", "siret": "", "fiabilite": "A", "source": "https://www.ari.asso.fr/actualites/dernieres-actualites/nouvelle-page-6", "note": "Campagne 2026 active ", "null": [" l'établissement bénéficiaire se choisit avec l'association."], "lat": 43.29405, "lon": 5.37883}, {"id": "60", "nom": "École de la 2e Chance de Marseille – site Saint-Louis", "categorie": "Insertion / 2e chance", "base_legale": "L6241-5 9°", "gestionnaire_statut": "Association E2C Marseille", "adresse": "360 chemin de la Madrague-Ville", "cp": "13015", "commune": "Marseille 15e", "uai": "", "siret": "", "fiabilite": "B", "source": "https://www.marseille.fr/social/ecole-de-la-deuxieme-chance", "note": "Autres sites : Romain-Rolland (9e), Montolieu (2e), antenne de Miramas.", "lat": 43.35649, "lon": 5.36783}, {"id": "61", "nom": "Apprentis d'Auteuil – Pôle Insertion 13 (PFI13)", "categorie": "Insertion / 2e chance", "base_legale": "L6241-5 9°", "gestionnaire_statut": "Fondation Apprentis d'Auteuil", "adresse": "", "cp": "13014", "commune": "Marseille 14e", "uai": "", "siret": "77568879901969", "fiabilite": "A", "source": "https://paca.apprentis-auteuil.org/actualites/insertion/taxe-apprentissage-paca-2026", "note": "Seul établissement Apprentis d'Auteuil habilité en PACA (selon la fondation).", "lat": 43.3469, "lon": 5.39519}, {"id": "62", "nom": "NRSud – école de production", "categorie": "École de production", "base_legale": "L6241-5 8°", "gestionnaire_statut": "Association, membre FNEP", "adresse": "chemin de la Madrague-Ville", "cp": "13015", "commune": "Marseille 15e", "uai": "", "siret": "", "fiabilite": "B", "source": "https://nrsud.fr/", "note": "CAP électricien.", "lat": 43.35539, "lon": 5.36953}, {"id": "63", "nom": "Fask Academy – école de production", "categorie": "École de production", "base_legale": "L6241-5 8°", "gestionnaire_statut": "Association, membre FNEP", "adresse": "Parc des Aygalades", "cp": "13014", "commune": "Marseille 14e", "uai": "", "siret": "", "fiabilite": "B", "source": "https://www.mission-jeune.fr/formations/etablissement/ecole-de-production-fask-academy-a-marseille-formations-et-contact", "note": "CAP mode et broderie.", "lat": 43.34612, "lon": 5.40041}, {"id": "64", "nom": "École de production « Je fabrique mon avenir »", "categorie": "École de production", "base_legale": "L6241-5 8°", "gestionnaire_statut": "Association (projet hors contrat)", "adresse": "", "cp": "", "commune": "Istres", "uai": "", "siret": "", "fiabilite": "C", "source": "https://www.net1901.org/association/ECOLE-DE-PRODUCTION-JE-FABRIQUE-MON-AVENIR-ISTRES,1000083247.html", "note": "Projet déclaré en 2025 : ouverture à confirmer.", "lat": 43.51147, "lon": 4.98753}, {"id": "65", "nom": "Mission locale de Marseille", "categorie": "Orientation (liste régionale SPRO)", "base_legale": "L6241-5 10° / liste régionale", "gestionnaire_statut": "Association", "adresse": "", "cp": "", "commune": "Marseille", "uai": "", "siret": "", "fiabilite": "A", "source": "https://missionlocalemarseille.fr/espaces-partenaires/verser-la-taxe-dapprentissage/", "note": "Page de collecte TA.", "lat": 43.29813, "lon": 5.3779}, {"id": "66", "nom": "Autres missions locales des Bouches-du-Rhône", "categorie": "Orientation (liste régionale SPRO)", "base_legale": "L6241-5 10° / liste régionale", "gestionnaire_statut": "Associations", "adresse": "", "cp": "", "commune": "Bouches-du-Rhône", "uai": "", "siret": "", "fiabilite": "C", "source": "https://www.unml.info/taxe-dapprentissage/", "note": "Habilitation individuelle, non automatique : vérifier chaque structure sur SOLTéA.", "lat": null, "lon": null}, {"id": "67", "nom": "Cité des métiers de Marseille", "categorie": "Orientation (liste régionale SPRO)", "base_legale": "L6241-5 10° / liste régionale", "gestionnaire_statut": "À vérifier", "adresse": "", "cp": "", "commune": "Marseille", "uai": "", "siret": "", "fiabilite": "C", "source": "https://citedesmetiers.fr/taxe-dapprentissage-2024/", "note": "Le réseau national collecte ", "null": [" habilitation de la structure marseillaise non confirmée."], "lat": 43.29672, "lon": 5.37609}, {"id": "68", "nom": "Entreprendre pour Apprendre PACA", "categorie": "Promotion des métiers (liste nationale)", "base_legale": "L6241-5 10°", "gestionnaire_statut": "Association", "adresse": "", "cp": "", "commune": "Marseille", "uai": "", "siret": "", "fiabilite": "C", "source": "https://www.entreprendre-pour-apprendre.fr/provence-alpes-cote-azur/kit-communication", "note": "Mention TA ancienne (avant 2020).", "lat": 43.29228, "lon": 5.37724}, {"id": "69", "nom": "Provence Formation (association gestionnaire et CFA)", "categorie": "Lycée privé sous contrat", "base_legale": "L6241-5 2°", "gestionnaire_statut": "Association loi 1901", "adresse": "", "cp": "", "commune": "Marseille", "uai": "0134294X", "siret": "", "fiabilite": "B", "source": "https://www.onisep.fr/ressources/structures-enseignement/provence-alpes-cote-d-azur/bouches-du-rhone/provence-formation", "note": "Tête de réseau de 7 lycées. La part CFA ne relève pas du solde SOLTéA.", "lat": 43.2966, "lon": 5.3746}, {"id": "70", "nom": "Fédération départementale des MFR 13", "categorie": "Enseignement agricole privé", "base_legale": "L6241-5 2°", "gestionnaire_statut": "Association (tête de réseau)", "adresse": "", "cp": "", "commune": "Salon-de-Provence", "uai": "", "siret": "", "fiabilite": "C", "source": "https://www.letudiant.fr/etudes/annuaire-enseignement-superieur/etablissement/etablissement-federation-departementale-des-maisons-familiales-et-rurales-des-bouches-du-rhone-2743.html", "note": "Tête de réseau : le fléchage se fait vers chaque MFR.", "lat": 43.63904, "lon": 5.09714}], "exclus": [{"nom": "CCI Aix-Marseille-Provence (écoles et CFA consulaires)", "motif": "Établissement public administratif (consulaire)", "source": "https://taxe-apprentissage.cciamp.com/"}, {"nom": "Chambre de métiers et de l'artisanat PACA", "motif": "Établissement public administratif (consulaire)", "source": "https://www.cmar-paca.fr/article/soutenez-lartisanat-avec-la-taxe-dapprentissage"}, {"nom": "Aix-Marseille Université et ses composantes (IUT, Polytech, facultés, INSPE, IMPGT…)", "motif": "Établissement public", "source": "https://polytech.univ-amu.fr/en/companies/apprenticeship-tax"}, {"nom": "Centrale Méditerranée, Arts et Métiers Aix, École de l'air et de l'espace", "motif": "Établissements publics", "source": "https://www.safecluster.com/actualites/etablissements-habilites-a-percevoir-le-solde-de-la-taxe-dapprentissage-dans-le-reseau-du-pole-safe/"}, {"nom": "ENSA-Marseille, Beaux-Arts de Marseille (ESADMM), Cnam PACA", "motif": "Établissements publics", "source": "https://www.cnam-paca.fr/alternance-entreprises"}, {"nom": "Lycées publics de l'académie (ex. La Viste, Antonin Artaud…)", "motif": "Établissements publics", "source": "https://www.site.ac-aix-marseille.fr/lyc-viste/spip/Campagne-Taxe-Apprentissage-2023.html"}, {"nom": "Écoles privées à but lucratif (SAS/SA : groupes Ionis, Galileo, etc.)", "motif": "Non éligibles au solde : L6241-5 vise les organismes à but non lucratif", "source": "https://entreprendre.service-public.gouv.fr/vosdroits/F22574"}, {"nom": "CFA (part apprentissage)", "motif": "Financés par les 87 % via les OPCO ; le solde ne leur est versé qu'en équipements (L6241-4)", "source": "https://www.centre-inffo.fr/site-droit-formation/modalites-de-gestion-de-la-part-de-13-de-la-taxe-dapprentissage"}, {"nom": "La Bourguette (autisme)", "motif": "Association, mais ses établissements fléchés TA sont dans le Vaucluse", "source": "https://www.bourguette-autisme.org/taxe-d-apprentissage/"}]};
+
+const CATS = [
+  ["Lycée privé sous contrat", "--c1"],
+  ["Enseignement agricole privé", "--c2"],
+  ["Supérieur privé non lucratif", "--c3"],
+  ["Formation sanitaire et sociale", "--c4"],
+  ["Établissement médico-social", "--c5"],
+  ["Insertion / 2e chance", "--c6"],
+  ["École de production", "--c7"],
+  ["Orientation & promotion des métiers", "--c8"],
+];
+const catOf = r => /Orientation|Promotion/.test(r.categorie) ? "Orientation & promotion des métiers" : r.categorie;
+const colorOf = c => `var(${(CATS.find(x => x[0] === c) || CATS[0])[1]})`;
+const ORG = DATA.organismes.map(r => ({ ...r, cat: catOf(r) }));
+
+// Centroïdes (doivent correspondre à build.py) pour la carte schématique.
+const COMMUNES = {
+  "Marseille": [43.2965, 5.381], "Aix-en-Provence": [43.529, 5.447], "Vitrolles": [43.46, 5.248],
+  "Salon-de-Provence": [43.64, 5.097], "Arles": [43.677, 4.631], "Martigues": [43.405, 5.048],
+  "Gémenos": [43.295, 5.628], "Aubagne": [43.292, 5.57], "Miramas": [43.582, 5.002],
+  "Barbentane": [43.9, 4.749], "La Roque-d'Anthéron": [43.716, 5.31], "Eyragues": [43.841, 4.842],
+  "Puyloubier": [43.525, 5.676], "Saint-Martin-de-Crau": [43.64, 4.813], "Lambesc": [43.654, 5.262],
+  "Rousset": [43.483, 5.62], "Istres": [43.514, 4.988],
+};
+const ARR = {
+  "1er": [43.300, 5.384], "2e": [43.312, 5.366], "3e": [43.312, 5.380], "4e": [43.306, 5.400],
+  "5e": [43.293, 5.398], "6e": [43.287, 5.380], "7e": [43.283, 5.360], "8e": [43.250, 5.380],
+  "9e": [43.245, 5.430], "10e": [43.277, 5.427], "11e": [43.290, 5.480], "12e": [43.307, 5.440],
+  "13e": [43.350, 5.430], "14e": [43.345, 5.395], "15e": [43.360, 5.365], "16e": [43.360, 5.320],
+};
+// Contour simplifié du département (lat, lon), tracé à la main : schéma, pas un relevé géodésique.
+const OUTLINE = [
+  [43.925,4.775],[43.905,4.86],[43.875,4.95],[43.83,5.03],[43.775,5.12],[43.735,5.2],[43.715,5.3],
+  [43.69,5.4],[43.67,5.5],[43.69,5.62],[43.71,5.72],[43.65,5.76],[43.58,5.76],[43.5,5.73],
+  [43.43,5.72],[43.35,5.69],[43.24,5.69],[43.18,5.66],[43.17,5.6],[43.2,5.53],[43.21,5.45],
+  [43.24,5.36],[43.29,5.36],[43.33,5.33],[43.36,5.3],[43.33,5.2],[43.33,5.1],[43.33,5.03],
+  [43.38,4.98],[43.42,4.9],[43.38,4.85],[43.36,4.78],[43.36,4.68],[43.38,4.56],[43.45,4.43],
+  [43.48,4.36],[43.55,4.33],[43.6,4.42],[43.66,4.55],[43.7,4.6],[43.76,4.64],[43.84,4.66],[43.9,4.72]
+];
+const BERRE = [[43.535,5.10],[43.53,5.17],[43.49,5.22],[43.44,5.21],[43.41,5.16],[43.42,5.08],[43.46,5.02],[43.5,5.03]];
+
+const svgNS = "http://www.w3.org/2000/svg";
+const el = (tag, attrs = {}, parent) => {
+  const e = document.createElementNS(svgNS, tag);
+  for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v);
+  if (parent) parent.appendChild(e);
+  return e;
+};
+function projector(latMin, latMax, lonMin, lonMax, w, h, pad) {
+  const k = Math.cos(43.5 * Math.PI / 180);
+  const sx = (w - 2 * pad) / ((lonMax - lonMin) * k), sy = (h - 2 * pad) / (latMax - latMin);
+  const s = Math.min(sx, sy);
+  const ox = pad + ((w - 2 * pad) - (lonMax - lonMin) * k * s) / 2;
+  const oy = pad + ((h - 2 * pad) - (latMax - latMin) * s) / 2;
+  return ([lat, lon]) => [ox + (lon - lonMin) * k * s, oy + (latMax - lat) * s];
+}
+
+let state = { q: "", fi: new Set(), cat: new Set(), place: null };
+
+function matches(r, ignorePlace) {
+  if (state.fi.size && !state.fi.has(r.fiabilite)) return false;
+  if (state.cat.size && !state.cat.has(r.cat)) return false;
+  if (!ignorePlace && state.place) {
+    const [kind, name] = state.place;
+    if (kind === "commune" && !(name === "Marseille" ? r.commune.startsWith("Marseille") : r.commune === name)) return false;
+    if (kind === "arr" && r.commune !== (name === "?" ? "Marseille" : "Marseille " + name)) return false;
+  }
+  if (state.q) {
+    const hay = [r.nom, r.commune, r.uai, r.siret, r.gestionnaire_statut, r.categorie, r.adresse].join(" ").toLowerCase();
+    if (!hay.includes(state.q)) return false;
+  }
+  return true;
+}
+
+function bubble(svg, x, y, items, place, label, labelSide, scale = 1) {
+  const n = items.length;
+  const g = el("g", {}, svg);
+  const r = (5 + Math.sqrt(n) * 3.2) * scale;
+  // Couleur : catégorie majoritaire.
+  const counts = {};
+  items.forEach(i => counts[i.cat] = (counts[i.cat] || 0) + 1);
+  const main = Object.entries(counts).sort((a, b) => b[1] - a[1])[0][0];
+  const sel = state.place && state.place[0] === place[0] && state.place[1] === place[1];
+  const c = el("circle", { cx: x, cy: y, r, class: "bubble" + (sel ? " sel" : ""), tabindex: 0, role: "button",
+    "aria-label": `${label} : ${n} organisme${n > 1 ? "s" : ""}` }, g);
+  c.style.fill = colorOf(main);
+  c.style.opacity = state.place && !sel ? .45 : .92;
+  el("title", {}, c).textContent = `${label} — ${n} organisme${n > 1 ? "s" : ""}`;
+  const t = el("text", { x, y: y + 4, "text-anchor": "middle", class: "count" }, g); t.textContent = n;
+  const pos = {
+    left: [x - r - 4, y + 4, "end"], right: [x + r + 4, y + 4, "start"],
+    above: [x, y - r - 5, "middle"], below: [x, y + r + 13, "middle"],
+  }[labelSide || "right"];
+  const tl = el("text", { x: pos[0], y: pos[1], class: "lbl", "text-anchor": pos[2] }, g);
+  tl.textContent = label;
+  const act = () => { state.place = sel ? null : place; render(); };
+  c.addEventListener("click", act);
+  c.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); act(); } });
+}
+
+function drawMain(list) {
+  const svg = document.getElementById("map13");
+  svg.replaceChildren();
+  const P = projector(43.15, 43.95, 4.3, 5.8, 640, 430, 18);
+  el("rect", { x: 0, y: 0, width: 640, height: 430, class: "sea", rx: 6 }, svg);
+  el("polygon", { points: OUTLINE.map(P).map(p => p.join(",")).join(" "), class: "land" }, svg);
+  el("polygon", { points: BERRE.map(P).map(p => p.join(",")).join(" "), class: "water" }, svg);
+  const [bx, by] = P([43.47, 5.12]); const tb = el("text", { x: bx, y: by + 4, "text-anchor": "middle", class: "lbl-sea" }, svg); tb.textContent = "Étang de Berre";
+  const [mx, my] = P([43.2, 5.0]); const tm = el("text", { x: mx, y: my, "text-anchor": "middle", class: "lbl-sea" }, svg); tm.textContent = "Méditerranée";
+  const [rx, ry] = P([43.8, 4.55]); const tr = el("text", { x: rx, y: ry, "text-anchor": "middle", class: "lbl-sea" }, svg); tr.textContent = "Rhône";
+  const [dx, dy] = P([43.79, 5.38]); const td = el("text", { x: dx, y: dy, "text-anchor": "middle", class: "lbl-sea" }, svg); td.textContent = "Durance";
+  const groups = {};
+  list.forEach(r => {
+    const key = r.commune.startsWith("Marseille") ? "Marseille" : r.commune;
+    if (COMMUNES[key]) (groups[key] = groups[key] || []).push(r);
+  });
+  const side = { Arles: "left", "Saint-Martin-de-Crau": "below", Barbentane: "left", Miramas: "left", Istres: "left",
+    Martigues: "left", Marseille: "left", Aubagne: "below", "Gémenos": "right", Lambesc: "above",
+    "Salon-de-Provence": "left", "Aix-en-Provence": "left", Puyloubier: "above", Rousset: "below" };
+  Object.entries(groups).sort((a, b) => b[1].length - a[1].length).forEach(([name, items]) => {
+    const [x, y] = P(COMMUNES[name]);
+    bubble(svg, x, y, items, ["commune", name], name, side[name] || "right");
+  });
+}
+
+function drawMarseille(list) {
+  const svg = document.getElementById("mapMrs");
+  svg.replaceChildren();
+  const P = projector(43.225, 43.375, 5.30, 5.50, 360, 330, 20);
+  el("rect", { x: 0, y: 0, width: 360, height: 330, class: "sea", rx: 6 }, svg);
+  const coast = [[43.39,5.29],[43.39,5.52],[43.21,5.52],[43.21,5.44],[43.22,5.40],[43.24,5.37],[43.265,5.365],[43.28,5.355],[43.295,5.36],[43.31,5.355],[43.33,5.33],[43.36,5.30],[43.37,5.29]];
+  el("polygon", { points: coast.map(P).map(p => p.join(",")).join(" "), class: "land" }, svg);
+  const [sx, sy] = P([43.25, 5.31]); const ts = el("text", { x: sx, y: sy, "text-anchor": "middle", class: "lbl-sea" }, svg); ts.textContent = "Rade de Marseille";
+  const groups = {};
+  list.filter(r => r.commune.startsWith("Marseille")).forEach(r => {
+    const a = r.commune === "Marseille" ? "?" : r.commune.replace("Marseille ", "");
+    (groups[a] = groups[a] || []).push(r);
+  });
+  Object.entries(groups).forEach(([a, items]) => {
+    const pos = a === "?" ? [43.245, 5.475] : ARR[a];
+    const [x, y] = P(pos);
+    const side = { "?": "above", "1er": "below", "2e": "left", "5e": "below", "6e": "left", "7e": "left", "14e": "below", "16e": "left", "15e": "above", "13e": "right", "4e": "above" };
+    bubble(svg, x, y, items, ["arr", a], a === "?" ? "Marseille (arr. ?)" : a, side[a] || "right", .8);
+  });
+}
+
+function stats(list) {
+  const c = { A: 0, B: 0, C: 0 };
+  list.forEach(r => c[r.fiabilite]++);
+  const communes = new Set(list.map(r => r.commune.startsWith("Marseille") ? "Marseille" : r.commune).filter(x => COMMUNES[x]));
+  document.getElementById("stats").innerHTML = [
+    [list.length, "organismes recensés"], [communes.size, "communes"],
+    [c.A, "collecte confirmée (A)"], [c.B, "statut éligible (B)"], [c.C, "à confirmer (C)"],
+  ].map(([n, l]) => `<div class="stat"><b>${n}</b><span>${l}</span></div>`).join("");
+}
+
+const esc = s => String(s ?? "").replace(/[&<>"]/g, ch => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[ch]));
+const host = u => { try { return new URL(u).hostname.replace(/^www\./, ""); } catch { return "source"; } };
+
+function table(list) {
+  const tb = document.getElementById("rows");
+  tb.innerHTML = list.map(r => `<tr>
+    <td><div class="nom">${esc(r.nom)}</div><div class="sub">${esc(r.gestionnaire_statut)}${r.note ? " · " + esc(r.note) : ""}</div></td>
+    <td><span class="cat"><i style="background:${colorOf(r.cat)}"></i>${esc(r.categorie)}</span><div class="sub">${esc(r.base_legale)}</div></td>
+    <td>${esc(r.commune)}${r.adresse ? `<div class="sub">${esc(r.adresse)}${r.cp ? ", " + esc(r.cp) : ""}</div>` : ""}</td>
+    <td>${r.uai ? `<div class="code">UAI ${esc(r.uai)}</div>` : ""}${r.siret ? `<div class="code">SIRET ${esc(r.siret)}</div>` : ""}${!r.uai && !r.siret ? '<span class="sub">—</span>' : ""}</td>
+    <td><span class="fi ${r.fiabilite}">${r.fiabilite}</span></td>
+    <td><a href="${esc(r.source)}" target="_blank" rel="noopener">${esc(host(r.source))}</a></td>
+  </tr>`).join("");
+  document.getElementById("empty").hidden = list.length > 0;
+  const t = document.getElementById("regTitle");
+  const place = state.place ? (state.place[0] === "arr" ? (state.place[1] === "?" ? "Marseille (arr. ?)" : "Marseille " + state.place[1]) : state.place[1]) : null;
+  t.textContent = `Registre · ${list.length} organisme${list.length > 1 ? "s" : ""}${place ? " · " + place : ""}`;
+}
+
+function render() {
+  const filtered = ORG.filter(r => matches(r, false));
+  const forMaps = ORG.filter(r => matches(r, true));
+  drawMain(forMaps);
+  drawMarseille(forMaps);
+  table(filtered);
+  stats(ORG);
+  document.querySelectorAll("[data-fi]").forEach(b => b.setAttribute("aria-pressed", state.fi.has(b.dataset.fi)));
+  document.querySelectorAll("[data-cat]").forEach(b => b.setAttribute("aria-pressed", state.cat.has(b.dataset.cat)));
+  document.getElementById("reset").hidden = !(state.q || state.fi.size || state.cat.size || state.place);
+}
+
+document.getElementById("legend").innerHTML = CATS.map(([c]) => `<span><i style="background:${colorOf(c)}"></i>${c} (${ORG.filter(r => r.cat === c).length})</span>`).join("");
+document.getElementById("catChips").innerHTML = CATS.map(([c]) => `<button class="chip" data-cat="${c}" aria-pressed="false">${c}</button>`).join("");
+document.getElementById("exclus").innerHTML = DATA.exclus.map(e => `<li><a href="${esc(e.source)}" target="_blank" rel="noopener">${esc(e.nom)}</a> : ${esc(e.motif)}</li>`).join("");
+
+const toggle = (set, v) => set.has(v) ? set.delete(v) : set.add(v);
+document.querySelectorAll("[data-fi]").forEach(b => b.addEventListener("click", () => { toggle(state.fi, b.dataset.fi); render(); }));
+document.querySelectorAll("[data-cat]").forEach(b => b.addEventListener("click", () => { toggle(state.cat, b.dataset.cat); render(); }));
+document.getElementById("q").addEventListener("input", e => { state.q = e.target.value.trim().toLowerCase(); render(); });
+document.getElementById("reset").addEventListener("click", () => {
+  state = { q: "", fi: new Set(), cat: new Set(), place: null };
+  document.getElementById("q").value = "";
+  render();
+});
+render();
+</script>
