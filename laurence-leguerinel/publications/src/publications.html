@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Laurence Leguérinel — 12 publications</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400&family=Inter:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --yellow:#F3F59E;
+    --grey:#E4E4E0;
+    --black:#0D0D0D;
+    --blue:#1F2BF2;
+    --white:#FFFFFF;
+    --serif:"Newsreader",Georgia,serif;
+    --sans:"Inter",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#fff;display:flex;flex-wrap:wrap;gap:40px;padding:40px;width:2400px}
+  .post{position:relative;width:1080px;height:1080px;overflow:hidden;color:var(--black)}
+  .post > svg.shape{position:absolute;inset:0;width:100%;height:100%}
+  .inner{position:absolute;inset:84px;display:flex;flex-direction:column}
+  .bottom{margin-top:auto}
+  .title{font-family:var(--serif);font-weight:300;font-size:108px;line-height:1.02;letter-spacing:-.018em;font-variation-settings:"opsz" 72;text-wrap:balance}
+  .title.m{font-size:92px}
+  .num{font-family:var(--serif);font-weight:300;font-size:340px;line-height:.78;letter-spacing:-.03em;font-variation-settings:"opsz" 72}
+  .sans{font-family:var(--sans);font-weight:500;font-size:52px;line-height:1.16;letter-spacing:-.01em}
+  .mark{width:84px;height:84px;display:block}
+  .mark path{fill:none;stroke:currentColor;stroke-width:5.5;stroke-linecap:round}
+  .tr{position:absolute;top:84px;right:84px}
+  .glyph{position:absolute;font-family:var(--serif);font-weight:300;line-height:1;font-variation-settings:"opsz" 72}
+</style>
+</head>
+<body>
+
+<!-- Mark: small wave curl, reused on every visual -->
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="wave" viewBox="0 0 84 84">
+    <path d="M6 32 q 12 -14 24 0 t 24 0 t 24 0"/>
+    <path d="M6 54 q 12 -14 24 0 t 24 0 t 24 0"/>
+  </symbol>
+</svg>
+
+<!-- 01 · Gris + ruban jaune -->
+<section class="post" id="p01" style="background:var(--grey)">
+  <svg class="shape" viewBox="0 0 1080 1080"><path d="M-80 360 C 120 120, 360 -40, 540 110 C 700 245, 600 470, 470 400 C 340 330, 470 110, 720 90 C 930 72, 1040 250, 1180 200" fill="none" stroke="var(--yellow)" stroke-width="128" stroke-linecap="round"/></svg>
+  <div class="inner">
+    <p class="title bottom">Parler, ça s’apprend. Communiquer aussi.</p>
+  </div>
+</section>
+
+<!-- 02 · Noir, texte jaune -->
+<section class="post" id="p02" style="background:var(--black);color:var(--yellow)">
+  <div class="inner">
+    <p class="title">Hier collègue, aujourd’hui manager.</p>
+    <svg class="mark bottom"><use href="#wave"/></svg>
+  </div>
+</section>
+
+<!-- 03 · Portrait -->
+<section class="post" id="p03" style="background:#3a3a3a;color:#fff">
+  <img src="laurence-nb.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.78)">
+  <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,13,13,0) 48%,rgba(13,13,13,.82) 100%)"></div>
+  <svg class="mark tr" style="color:var(--yellow)"><use href="#wave"/></svg>
+  <div class="inner">
+    <p class="sans bottom" style="font-size:46px">Laurence Leguérinel<br>Coach des managers en prise de poste</p>
+  </div>
+</section>
+
+<!-- 04 · Jaune + ruban gris + chiffre -->
+<section class="post" id="p04" style="background:var(--yellow)">
+  <svg class="shape" viewBox="0 0 1080 1080"><path d="M560 -90 C 600 140, 820 260, 980 180 C 1110 115, 1060 -20, 960 30 C 860 80, 900 330, 1180 420" fill="none" stroke="var(--grey)" stroke-width="128" stroke-linecap="round"/></svg>
+  <div class="inner">
+    <p class="num">3</p>
+    <p class="title m bottom">questions à se poser avant sa première réunion d’équipe.</p>
+  </div>
+</section>
+
+<!-- 05 · Gris + ruban jaune bas -->
+<section class="post" id="p05" style="background:var(--grey)">
+  <svg class="shape" viewBox="0 0 1080 1080"><path d="M-100 700 C 140 560, 300 820, 200 960 C 120 1070, -20 980, 60 880 C 160 760, 420 900, 520 1180" fill="none" stroke="var(--yellow)" stroke-width="120" stroke-linecap="round"/></svg>
+  <div class="inner">
+    <svg class="mark"><use href="#wave"/></svg>
+    <p class="title m" style="margin-top:96px;position:relative">Le titre se donne.<br>La légitimité se construit.</p>
+  </div>
+</section>
+
+<!-- 06 · Jaune + grand glyphe blanc -->
+<section class="post" id="p06" style="background:var(--yellow)">
+  <span class="glyph" style="color:var(--white);font-size:1300px;right:-90px;top:40px">?</span>
+  <div class="inner">
+    <svg class="mark" style="position:relative"><use href="#wave"/></svg>
+    <p class="title bottom" style="position:relative;max-width:640px">Votre posture vous ressemble-t-elle ?</p>
+  </div>
+</section>
+
+<!-- 07 · Blanc + grand glyphe gris -->
+<section class="post" id="p07" style="background:var(--white)">
+  <span class="glyph" style="color:var(--grey);font-size:2700px;right:-520px;top:200px">“</span>
+  <svg class="mark tr"><use href="#wave"/></svg>
+  <div class="inner">
+    <p class="title" style="position:relative;margin-top:170px;max-width:760px">Écouter, c’est déjà manager.</p>
+  </div>
+</section>
+
+<!-- 08 · Gris + ruban jaune + chiffre -->
+<section class="post" id="p08" style="background:var(--grey)">
+  <svg class="shape" viewBox="0 0 1080 1080"><path d="M420 -100 C 520 120, 760 120, 900 20 C 1000 -50, 1120 40, 1040 150 C 960 260, 760 230, 760 360 C 760 470, 960 520, 1180 470" fill="none" stroke="var(--yellow)" stroke-width="124" stroke-linecap="round"/></svg>
+  <div class="inner">
+    <p class="num" style="position:relative">4</p>
+    <p class="title m bottom">étapes pour un feedback qui fait grandir.</p>
+  </div>
+</section>
+
+<!-- 09 · Bleu + ruban noir -->
+<section class="post" id="p09" style="background:var(--blue);color:var(--white)">
+  <svg class="shape" viewBox="0 0 1080 1080"><path d="M1180 120 C 920 40, 760 260, 900 400 C 1010 510, 1150 380, 1060 300 C 960 210, 700 380, 820 620 C 900 780, 1100 760, 1180 700" fill="none" stroke="var(--black)" stroke-width="124" stroke-linecap="round"/></svg>
+  <div class="inner">
+    <svg class="mark"><use href="#wave"/></svg>
+    <p class="title bottom" style="position:relative;max-width:720px">Qui parle quand vous parlez ?</p>
+  </div>
+</section>
+
+<!-- 10 · Noir dégradé bleu -->
+<section class="post" id="p10" style="background:var(--black);color:var(--white)">
+  <div style="position:absolute;inset:0;background:radial-gradient(60% 52% at 60% 36%,rgba(255,255,255,.16),rgba(255,255,255,0) 70%)"></div>
+  <svg class="shape" viewBox="0 0 1080 1080">
+    <defs><linearGradient id="card" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d8d8d4"/><stop offset="1" stop-color="#6c6c6c"/></linearGradient></defs>
+    <rect x="300" y="170" width="300" height="400" rx="10" fill="url(#card)" opacity=".55" transform="rotate(-12 450 370)"/>
+    <rect x="470" y="150" width="300" height="400" rx="10" fill="url(#card)" opacity=".75" transform="rotate(6 620 350)"/>
+    <rect x="620" y="210" width="300" height="400" rx="10" fill="url(#card)" opacity=".95" transform="rotate(17 770 410)"/>
+  </svg>
+  <div style="position:absolute;left:0;right:0;bottom:0;height:46%;background:linear-gradient(180deg,rgba(31,43,242,0),var(--blue) 92%)"></div>
+  <svg class="mark tr"><use href="#wave"/></svg>
+  <div class="inner">
+    <p class="sans bottom" style="position:relative;max-width:760px">Une image ouvre ce que les mots retiennent.</p>
+  </div>
+</section>
+
+<!-- 11 · Noir + ruban bleu + chiffre -->
+<section class="post" id="p11" style="background:var(--black);color:var(--white)">
+  <svg class="shape" viewBox="0 0 1080 1080"><path d="M-100 480 C 120 380, 300 300, 360 160 C 410 40, 300 -20, 250 60 C 190 160, 420 260, 620 140 C 780 45, 800 -40, 760 -120" fill="none" stroke="var(--blue)" stroke-width="124" stroke-linecap="round"/></svg>
+  <div class="inner">
+    <p class="num" style="position:relative;margin-left:180px">5</p>
+    <p class="title m bottom">leçons tirées de cinq ans auprès des managers.</p>
+  </div>
+</section>
+
+<!-- 12 · Jaune uni -->
+<section class="post" id="p12" style="background:var(--yellow)">
+  <div class="inner">
+    <svg class="mark"><use href="#wave"/></svg>
+    <p class="title bottom">Prendre un poste, c’est aussi une transition.</p>
+  </div>
+</section>
+
+</body>
+</html>
