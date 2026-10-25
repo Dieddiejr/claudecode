@@ -1,0 +1,200 @@
+/* =====================================================================
+   recitales.css : feuille de style des propositions Studio Récitales
+   NE PAS MODIFIER CE FICHIER. Tout le design est ici et il est réglé.
+   Unité : 1cqw = 1 % de la largeur de la diapo
+           = 19,2 px quand la diapo fait 1920 x 1080 px (PDF)
+           = 5,08 mm sur la page PDF (508 x 285,75 mm).
+   ===================================================================== */
+:root{--logo:url('../logo/logo-studio-recitales.png');
+  --green:linear-gradient(180deg,#C6FBAE 0%,#E6FBD9 55%,#FBFDF8 100%);--green-ink:#14363A;
+  --yellow:linear-gradient(180deg,#FFF59A 0%,#FFF9CC 50%,#FFFDF2 100%);--yellow-ink:#8A4A1F;
+  --blue:linear-gradient(180deg,#BFDCFF 0%,#E3EDFF 55%,#FCEFEF 100%);--blue-ink:#14213D;
+  --font:'Schibsted Grotesk',system-ui,sans-serif;
+  /* tailles : en cqw, elles suivent la largeur de la diapo */
+  --fs-h:4.6cqw;--fs-h-sm:3.5cqw;--fs-s:2.1cqw;--fs-t:1.85cqw;--fs-x:1.2cqw;--fs-label:.95cqw;
+  --fs-cover:4.1cqw;--fs-cover-sub:3.1cqw;--fs-h5:3.4cqw;--fs-pic-t:1.6cqw;--fs-pic-x:1.1cqw;
+  --pad:2.8cqw;--pad-sm:1.6cqw;--gap:1.4cqw;--r:1.1cqw;
+}
+*{box-sizing:border-box}
+html{scroll-snap-type:y mandatory;background:#fff}
+body{margin:0;background:#fff;color:var(--green-ink);font-family:var(--font);-webkit-font-smoothing:antialiased;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+a{color:inherit;text-decoration:none}
+
+/* diapos 16:9 qui tiennent dans l'écran */
+.page{position:relative;width:min(100vw,177.78vh);aspect-ratio:16/9;margin:0 auto;container-type:inline-size;scroll-snap-align:center}
+.in{height:100%;padding:1.8cqw;display:grid;gap:var(--gap)}
+.c2 .in{grid-template-columns:repeat(2,minmax(0,1fr))}
+.side .in{grid-template-columns:minmax(0,1fr) minmax(0,2.2fr)}
+
+.card{position:relative;border-radius:var(--r);padding:var(--pad);display:flex;flex-direction:column;min-width:0;min-height:0;overflow:hidden}
+.g{background:var(--green);color:var(--green-ink)}
+.y{background:var(--yellow);color:var(--yellow-ink)}
+.b{background:var(--blue);color:var(--blue-ink)}
+.between{justify-content:space-between}
+.center{justify-content:center;align-items:center}
+.end{margin-top:auto}
+
+.logo{display:block;width:12cqw;aspect-ratio:3.093/1;background:var(--logo) no-repeat left center/contain}
+h1,h2{margin:0;font-weight:500;font-size:var(--fs-h);line-height:.98;letter-spacing:-.035em;text-wrap:balance}
+h2.sm{font-size:var(--fs-h-sm);line-height:1.02}
+p{margin:0}
+.s{font-weight:500;font-size:var(--fs-s);line-height:1.08;letter-spacing:-.03em;text-wrap:pretty}
+.x{font-size:var(--fs-x);line-height:1.45;letter-spacing:-.005em;text-wrap:pretty}
+.label{align-self:flex-start;display:inline-block;font-size:var(--fs-label);font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:.55cqw 1.1cqw;border-radius:99px;border:.08cqw solid currentColor}
+.stack{display:flex;flex-direction:column;gap:1.4cqw}
+
+/* trois cartes côte à côte */
+.trio{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gap);min-height:0}
+.trio .card{padding:var(--pad-sm);gap:2cqw}
+.trio .s{font-size:var(--fs-t)}
+.vis{position:relative;height:27cqw;border-radius:.45cqw;overflow:hidden;flex:none}
+.vis>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.vis.mock{display:grid;place-items:center;overflow:visible}
+.real .vis{height:auto;aspect-ratio:598/747}
+.sum .s{font-size:2.8cqw}
+.sum .price{font-size:5.4cqw;letter-spacing:-.04em;line-height:1}
+
+/* liste des cinq vidéos */
+.list{display:flex;flex-direction:column;height:100%}
+.row{flex:1;display:grid;grid-template-columns:4cqw minmax(0,1fr) minmax(0,1.3fr);column-gap:2cqw;align-items:center;border-top:.08cqw solid rgba(20,33,61,.16)}
+.row:first-child{border-top:0}
+.row .n{font-size:var(--fs-label);font-weight:500;letter-spacing:.06em;opacity:.6}
+.row .t{font-size:var(--fs-t);font-weight:500;line-height:1.05;letter-spacing:-.03em}
+.row .d{font-size:var(--fs-x);line-height:1.45}
+.y .row{border-top-color:rgba(138,74,31,.2)}
+.g .row{border-top-color:rgba(20,54,58,.16)}
+.side-ph{margin-top:2.4cqw;border-radius:.45cqw;overflow:hidden;aspect-ratio:16/10;flex:none}
+.side-ph img{display:block;width:100%;height:100%;object-fit:cover}
+
+/* couverture */
+.cover-big{font-size:var(--fs-cover);font-weight:500;line-height:1;letter-spacing:-.035em;text-wrap:balance}
+.cover-sub{font-size:var(--fs-cover-sub);font-weight:500;line-height:1.08;letter-spacing:-.03em;text-wrap:pretty}
+.hl{background:#fff;border-radius:.5cqw;padding:0 .45cqw;-webkit-box-decoration-break:clone;box-decoration-break:clone;white-space:nowrap}
+.cover-tel{position:absolute!important;right:4cqw;bottom:-7cqw}
+
+/* cinq vidéos en photos (diapo des fêtes) */
+.side5 .in{grid-template-columns:minmax(0,1.25fr) repeat(5,minmax(0,1fr))}
+.side5 .lead{padding:2.2cqw}
+.side5 .lead h2{font-size:var(--fs-h5)}
+.side5 .lead .s{font-size:var(--fs-t)}
+.pic{padding:1.1cqw;gap:1.6cqw}
+.pic .vis{height:auto;flex:1 1 auto;min-height:0}
+.pic .stack{flex:none;min-height:12.6cqw}
+.pic .s{font-size:var(--fs-pic-t)}
+.pic .x{font-size:var(--fs-pic-x);line-height:1.4}
+
+/* deux téléphones */
+.duo-tel{display:flex;justify-content:center;align-items:center;gap:3cqw;height:100%}
+
+/* bouton */
+.btn{align-self:flex-start;display:inline-block;background:var(--green-ink);color:#fff;border-radius:99px;padding:1cqw 1.8cqw;font-size:var(--fs-x);font-weight:500}
+.contact{font-size:var(--fs-x);line-height:1.6}
+
+/* ===== maquettes (téléphone, Reel, profil Instagram, navigateur) ===== */
+.fx{position:absolute;z-index:5;margin:0;container-type:inline-size;transform:rotate(var(--r,0deg));transform-origin:50% 50%}
+.fx img{display:block;width:100%;height:100%;object-fit:cover}
+.fx-b{position:relative}
+.fx .fx-in{position:relative;width:100%;aspect-ratio:var(--ar,3/2);overflow:hidden;background:#dfe4ea}
+.fx .fx-in>img{position:absolute;inset:0}
+.fx-t{display:block}
+
+/* téléphone (base des cadres réseaux) */
+.fx-tel>.fx-b{background:#0d0d0f;border-radius:15cqw;padding:3.6cqw;box-shadow:0 4cqw 10cqw rgba(10,25,45,.4),inset 0 0 0 .5cqw #2b2b30}
+.fx-tel>.fx-b>.fx-in{--ar:9/19.5;border-radius:11.5cqw;background:#fff}
+.fx-tel>.fx-b>.fx-in::after{content:"";position:absolute;z-index:6;left:36%;top:2.6cqw;width:28%;height:7.6cqw;border-radius:99px;background:#0d0d0f}
+/* écran des réseaux : textes et icônes */
+.fx-ui{position:absolute;inset:0;z-index:3;color:#fff;font-size:4.2cqw;line-height:1.3;pointer-events:none}
+.fx-ui .fx-t,.fx-ui img{pointer-events:auto}
+.fx-ui svg{width:7.4cqw;height:7.4cqw;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;display:block}
+.fx-av{width:9cqw;height:9cqw;border-radius:50%;overflow:hidden;flex:none;background:#c9ced8;position:relative}
+.fx-av img{position:absolute;inset:0}
+/* reel */
+.fx-reel .fx-ui{background:linear-gradient(180deg,rgba(0,0,0,.28) 0%,rgba(0,0,0,0) 18%,rgba(0,0,0,0) 62%,rgba(0,0,0,.55) 100%)}
+.fx-reel .fx-top{position:absolute;left:6cqw;top:13cqw;font-size:5.6cqw;font-weight:700}
+.fx-reel .fx-side{position:absolute;right:4.4cqw;bottom:16cqw;display:flex;flex-direction:column;gap:5.5cqw;align-items:center}
+.fx-reel .fx-bot{position:absolute;left:5cqw;right:17cqw;bottom:7cqw}
+.fx-reel .fx-who{display:flex;align-items:center;gap:2.6cqw;font-weight:700;margin-bottom:2.6cqw}
+.fx-reel .fx-cap{font-size:4cqw;opacity:.95}
+/* profil Instagram dans un téléphone */
+.fx-profil>.fx-b>.fx-in{background:#fff;color:#000}
+.fx-ig{position:absolute;inset:0;padding:13cqw 0 0;font-size:3.5cqw;line-height:1.3;overflow:hidden}
+.fx-ig .fx-user{display:flex;align-items:center;justify-content:center;gap:1.4cqw;font-weight:700;font-size:4.8cqw;padding:0 5cqw 3.6cqw}
+.fx-ig .fx-row{display:flex;align-items:center;gap:4cqw;padding:0 5cqw}
+.fx-ig .fx-row .fx-av{width:21cqw;height:21cqw;box-shadow:0 0 0 .7cqw #fff,0 0 0 1.3cqw #d6d9de}
+.fx-ig .fx-stats{flex:1;display:flex;justify-content:space-around;text-align:center}
+.fx-ig .fx-stats b{display:block;font-size:4.6cqw;font-weight:700}
+.fx-ig .fx-stats span{font-size:3.3cqw}
+.fx-ig .fx-name{padding:3cqw 5cqw 0;font-weight:700;font-size:3.7cqw}
+.fx-ig .fx-bio{padding:.6cqw 5cqw 0;font-size:3.6cqw}
+.fx-ig .fx-btns{display:flex;gap:1.6cqw;padding:3.4cqw 5cqw}
+.fx-ig .fx-btns span{flex:1;text-align:center;border-radius:2cqw;padding:2cqw 0;font-weight:600;background:#efefef}
+.fx-ig .fx-btns span:first-child{background:#0095f6;color:#fff}
+.fx-ig .fx-tabs{display:flex;justify-content:space-around;border-top:.3cqw solid #ececec;margin-top:.6cqw}
+.fx-ig .fx-tabs span{flex:1;display:grid;place-items:center;padding:2.4cqw 0;color:#8e8e8e}
+.fx-ig .fx-tabs span:first-child{color:#000;box-shadow:inset 0 -.5cqw 0 #000}
+.fx-ig .fx-tabs svg{width:6.4cqw;height:6.4cqw;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.fx-ig .fx-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.5cqw}
+.fx-ig .fx-tile{position:relative;aspect-ratio:3/4;overflow:hidden;background:#e4e7ec}
+.fx-ig .fx-tile img{position:absolute;inset:0}
+.fx-ig .fx-tile svg{position:absolute;top:1.8cqw;width:5cqw;height:5cqw;fill:#fff;stroke:none;filter:drop-shadow(0 .2cqw .5cqw rgba(0,0,0,.45));z-index:2}
+.fx-ig .fx-tile .fx-pin{right:1.8cqw}
+.fx-ig .fx-tile .fx-rl{right:8cqw}
+.fx-ig .fx-tile.fx-mark{box-shadow:inset 0 0 0 1.1cqw #ff8a3d}
+
+/* fenêtre de navigateur */
+.fx-nav>.fx-b{background:#fff;border-radius:2cqw;overflow:hidden;box-shadow:0 3cqw 8cqw rgba(10,25,45,.32)}
+.fx-nav .fx-hd{display:flex;align-items:center;gap:1.2cqw;height:6cqw;padding:0 2.4cqw;background:#eef0f3;border-bottom:.15cqw solid #dfe2e8}
+.fx-nav .fx-hd i{width:1.6cqw;height:1.6cqw;border-radius:50%;background:#cfd3da}
+.fx-nav .fx-url{margin-left:2cqw;flex:1;max-width:60%;background:#fff;border-radius:1cqw;padding:.7cqw 2cqw;font-size:2.2cqw;color:#5a6270;white-space:nowrap;overflow:hidden}
+.fx-nav .fx-in{--ar:16/10;border-radius:0}
+.fx{position:relative;z-index:auto;flex:none}
+.fx-ig .fx-tile .fx-rl{right:1.8cqw}
+.fx-av{background:linear-gradient(135deg,#C6FBAE,#BFDCFF)}
+
+/* ===== ajouts du kit ===== */
+/* G03 avec 4 cartes : ajouter la classe quad à la div trio */
+.trio.quad{grid-template-columns:repeat(4,minmax(0,1fr))}
+.quad .vis{height:24cqw}
+/* G02 : photo en bas de la carte de droite */
+.intro-ph{margin-top:auto;height:27cqw;border-radius:.45cqw;overflow:hidden;flex:none}
+.intro-ph img{display:block;width:100%;height:100%;object-fit:cover}
+
+@page{size:1920px 1080px;margin:0}
+@media print{
+  html{scroll-snap-type:none}
+  .page{width:1920px;height:1080px;break-after:page;page-break-after:always}
+}
+
+/* ===== téléphone : les diapos deviennent une page qui défile ===== */
+@media (max-width:760px){
+  :root{--fs-h:10.5vw;--fs-h-sm:8.6vw;--fs-s:6vw;--fs-t:5.6vw;--fs-x:4.1vw;--fs-label:3vw;--pad:7vw;--pad-sm:6vw;--gap:12px;--r:16px;--fs-cover:9.5vw;--fs-cover-sub:7.4vw;--fs-h5:10.5vw;--fs-pic-t:5.6vw;--fs-pic-x:4.1vw}
+  html{scroll-snap-type:none}
+  .page{width:100%;aspect-ratio:auto;container-type:normal}
+  .in,.c2 .in,.side .in{display:flex;flex-direction:column;height:auto;padding:12px 16px}
+  .card{min-height:0;gap:6vw}
+  .logo{width:42vw}
+  .label{padding:1.5vw 3vw;border-width:1px}
+  .stack{gap:4vw}
+  .trio{grid-template-columns:1fr}
+  .vis{height:62vw}
+  .real .vis{height:auto}
+  .row{grid-template-columns:9vw minmax(0,1fr);row-gap:1.5vw;padding:5vw 0;border-top-width:1px}
+  .row .d{grid-column:2}
+  .side-ph{margin-top:0}
+  .cover-r{gap:8vw;padding-bottom:0}
+  .cover-tel{position:relative!important;right:auto;bottom:auto;align-self:center;margin-bottom:-14vw}
+  .side5 .lead,.pic{padding:var(--pad-sm)}
+  .pic .vis{flex:none;aspect-ratio:4/5}
+  .pic .stack{min-height:0}
+  .duo-tel{gap:4vw}
+  .fx-tel{width:46vw!important}
+  .duo-tel .fx-tel{width:42vw!important}
+  .vis.mock .fx-tel{width:28vw!important}
+  .sum .s{font-size:var(--fs-s)}
+  .sum .price{font-size:14vw}
+  .fx-nav{width:100%!important}
+  .btn{padding:3vw 5vw}
+  .cover-l{min-height:55vh}
+  .trio.quad{grid-template-columns:1fr}
+  .intro-ph{height:62vw}
+}

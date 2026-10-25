@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Offre Découverte fêtes</title>
+<style>{{FONTS}}
+
+:root{--logo:url({{img:v00}});
+  --green:linear-gradient(180deg,#C6FBAE 0%,#E6FBD9 55%,#FBFDF8 100%);--green-ink:#14363A;
+  --yellow:linear-gradient(180deg,#FFF59A 0%,#FFF9CC 50%,#FFFDF2 100%);--yellow-ink:#8A4A1F;
+  --blue:linear-gradient(180deg,#BFDCFF 0%,#E3EDFF 55%,#FCEFEF 100%);--blue-ink:#14213D;
+  --font:'Schibsted Grotesk',system-ui,sans-serif;
+  /* tailles : en cqw, elles suivent la largeur de la diapo */
+  --fs-h:4.6cqw;--fs-h-sm:3.5cqw;--fs-s:2.1cqw;--fs-t:1.85cqw;--fs-x:1.2cqw;--fs-label:.95cqw;
+  --fs-cover:4.1cqw;--fs-cover-sub:3.1cqw;--fs-h5:3.4cqw;--fs-pic-t:1.6cqw;--fs-pic-x:1.1cqw;
+  --pad:2.8cqw;--pad-sm:1.6cqw;--gap:1.4cqw;--r:1.1cqw;
+}
+*{box-sizing:border-box}
+html{scroll-snap-type:y mandatory;background:#fff}
+body{margin:0;background:#fff;color:var(--green-ink);font-family:var(--font);-webkit-font-smoothing:antialiased;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+a{color:inherit;text-decoration:none}
+
+/* diapos 16:9 qui tiennent dans l'écran */
+.page{position:relative;width:min(100vw,177.78vh);aspect-ratio:16/9;margin:0 auto;container-type:inline-size;scroll-snap-align:center}
+.in{height:100%;padding:1.8cqw;display:grid;gap:var(--gap)}
+.c2 .in{grid-template-columns:repeat(2,minmax(0,1fr))}
+.side .in{grid-template-columns:minmax(0,1fr) minmax(0,2.2fr)}
+
+.card{position:relative;border-radius:var(--r);padding:var(--pad);display:flex;flex-direction:column;min-width:0;min-height:0;overflow:hidden}
+.g{background:var(--green);color:var(--green-ink)}
+.y{background:var(--yellow);color:var(--yellow-ink)}
+.b{background:var(--blue);color:var(--blue-ink)}
+.between{justify-content:space-between}
+.center{justify-content:center;align-items:center}
+.end{margin-top:auto}
+
+.logo{display:block;width:12cqw;aspect-ratio:3.093/1;background:var(--logo) no-repeat left center/contain}
+h1,h2{margin:0;font-weight:500;font-size:var(--fs-h);line-height:.98;letter-spacing:-.035em;text-wrap:balance}
+h2.sm{font-size:var(--fs-h-sm);line-height:1.02}
+p{margin:0}
+.s{font-weight:500;font-size:var(--fs-s);line-height:1.08;letter-spacing:-.03em;text-wrap:pretty}
+.x{font-size:var(--fs-x);line-height:1.45;letter-spacing:-.005em;text-wrap:pretty}
+.label{align-self:flex-start;display:inline-block;font-size:var(--fs-label);font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:.55cqw 1.1cqw;border-radius:99px;border:.08cqw solid currentColor}
+.stack{display:flex;flex-direction:column;gap:1.4cqw}
+
+/* trois cartes côte à côte */
+.trio{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gap);min-height:0}
+.trio .card{padding:var(--pad-sm);gap:2cqw}
+.trio .s{font-size:var(--fs-t)}
+.vis{position:relative;height:27cqw;border-radius:.45cqw;overflow:hidden;flex:none}
+.vis>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.vis.mock{display:grid;place-items:center;overflow:visible}
+.real .vis{height:auto;aspect-ratio:598/747}
+.sum .s{font-size:2.8cqw}
+.sum .price{font-size:5.4cqw;letter-spacing:-.04em;line-height:1}
+
+/* liste des cinq vidéos */
+.list{display:flex;flex-direction:column;height:100%}
+.row{flex:1;display:grid;grid-template-columns:4cqw minmax(0,1fr) minmax(0,1.3fr);column-gap:2cqw;align-items:center;border-top:.08cqw solid rgba(20,33,61,.16)}
+.row:first-child{border-top:0}
+.row .n{font-size:var(--fs-label);font-weight:500;letter-spacing:.06em;opacity:.6}
+.row .t{font-size:var(--fs-t);font-weight:500;line-height:1.05;letter-spacing:-.03em}
+.row .d{font-size:var(--fs-x);line-height:1.45}
+.y .row{border-top-color:rgba(138,74,31,.2)}
+.g .row{border-top-color:rgba(20,54,58,.16)}
+.side-ph{margin-top:2.4cqw;border-radius:.45cqw;overflow:hidden;aspect-ratio:16/10;flex:none}
+.side-ph img{display:block;width:100%;height:100%;object-fit:cover}
+
+/* couverture */
+.cover-big{font-size:var(--fs-cover);font-weight:500;line-height:1;letter-spacing:-.035em;text-wrap:balance}
+.cover-sub{font-size:var(--fs-cover-sub);font-weight:500;line-height:1.08;letter-spacing:-.03em;text-wrap:pretty}
+.hl{background:#fff;border-radius:.5cqw;padding:0 .45cqw;-webkit-box-decoration-break:clone;box-decoration-break:clone;white-space:nowrap}
+.cover-tel{position:absolute!important;right:4cqw;bottom:-7cqw}
+
+/* cinq vidéos en photos (diapo des fêtes) */
+.side5 .in{grid-template-columns:minmax(0,1.25fr) repeat(5,minmax(0,1fr))}
+.side5 .lead{padding:2.2cqw}
+.side5 .lead h2{font-size:var(--fs-h5)}
+.side5 .lead .s{font-size:var(--fs-t)}
+.pic{padding:1.1cqw;gap:1.6cqw}
+.pic .vis{height:auto;flex:1 1 auto;min-height:0}
+.pic .stack{flex:none;min-height:12.6cqw}
+.pic .s{font-size:var(--fs-pic-t)}
+.pic .x{font-size:var(--fs-pic-x);line-height:1.4}
+
+/* deux téléphones */
+.duo-tel{display:flex;justify-content:center;align-items:center;gap:3cqw;height:100%}
+
+/* bouton */
+.btn{align-self:flex-start;display:inline-block;background:var(--green-ink);color:#fff;border-radius:99px;padding:1cqw 1.8cqw;font-size:var(--fs-x);font-weight:500}
+.contact{font-size:var(--fs-x);line-height:1.6}
+
+/* ===== maquettes (téléphone, Reel, profil Instagram, navigateur) ===== */
+{{FX}}
+.fx{position:relative;z-index:auto;flex:none}
+.fx-ig .fx-tile .fx-rl{right:1.8cqw}
+.fx-av{background:linear-gradient(135deg,#C6FBAE,#BFDCFF)}
+
+@page{size:1920px 1080px;margin:0}
+@media print{
+  html{scroll-snap-type:none}
+  .page{width:1920px;height:1080px;break-after:page;page-break-after:always}
+}
+
+/* ===== téléphone : les diapos deviennent une page qui défile ===== */
+@media (max-width:760px){
+  :root{--fs-h:10.5vw;--fs-h-sm:8.6vw;--fs-s:6vw;--fs-t:5.6vw;--fs-x:4.1vw;--fs-label:3vw;--pad:7vw;--pad-sm:6vw;--gap:12px;--r:16px;--fs-cover:9.5vw;--fs-cover-sub:7.4vw;--fs-h5:10.5vw;--fs-pic-t:5.6vw;--fs-pic-x:4.1vw}
+  html{scroll-snap-type:none}
+  .page{width:100%;aspect-ratio:auto;container-type:normal}
+  .in,.c2 .in,.side .in{display:flex;flex-direction:column;height:auto;padding:12px 16px}
+  .card{min-height:0;gap:6vw}
+  .logo{width:42vw}
+  .label{padding:1.5vw 3vw;border-width:1px}
+  .stack{gap:4vw}
+  .trio{grid-template-columns:1fr}
+  .vis{height:62vw}
+  .real .vis{height:auto}
+  .row{grid-template-columns:9vw minmax(0,1fr);row-gap:1.5vw;padding:5vw 0;border-top-width:1px}
+  .row .d{grid-column:2}
+  .side-ph{margin-top:0}
+  .cover-r{gap:8vw;padding-bottom:0}
+  .cover-tel{position:relative!important;right:auto;bottom:auto;align-self:center;margin-bottom:-14vw}
+  .side5 .lead,.pic{padding:var(--pad-sm)}
+  .pic .vis{flex:none;aspect-ratio:4/5}
+  .pic .stack{min-height:0}
+  .duo-tel{gap:4vw}
+  .fx-tel{width:46vw!important}
+  .duo-tel .fx-tel{width:42vw!important}
+  .vis.mock .fx-tel{width:28vw!important}
+  .sum .s{font-size:var(--fs-s)}
+  .sum .price{font-size:14vw}
+  .fx-nav{width:100%!important}
+  .btn{padding:3vw 5vw}
+  .cover-l{min-height:55vh}
+}
+</style></head>
+<body>
+
+<!-- 1. Accroche -->
+<section class="page c2"><div class="in">
+  <div class="card g between cover-l">
+    <div class="logo" role="img" aria-label="Studio Récitales"></div>
+    <div class="stack">
+      <span class="label">Offre Découverte</span>
+      <h1>Vous préparez une nouveauté, une promo ou une offre spéciale pour les fêtes&nbsp;?</h1>
+    </div>
+  </div>
+  <div class="card y cover-r">
+    <div class="stack">
+      <p class="cover-big">On vous aide à la faire découvrir.</p>
+      <p class="cover-sub">10&nbsp;vidéos tournées chez vous en 2&nbsp;heures, pour <span class="hl">100&nbsp;€</span>.</p>
+    </div>
+    <figure class="fx fx-tel fx-reel cover-tel" style="width:15cqw"><div class="fx-b"><div class="fx-in"><img alt="Samuel Perraro dans son atelier" src="{{img:a00:600:0.4615:0.6}}"><div class="fx-ui"><div class="fx-top">Reels</div><div class="fx-side">{{ICO_SIDE}}</div><div class="fx-bot"><div class="fx-who"><div class="fx-av"></div><div class="fx-t">votre_compte</div></div><div class="fx-t fx-cap">Notre nouveauté pour les fêtes</div></div></div></div></div></figure>
+  </div>
+</div></section>
+
+<!-- 2. Notre format -->
+<section class="page side"><div class="in">
+  <div class="card b between">
+    <p class="s">On vient à votre rencontre pendant deux heures pour présenter votre activité, ce que vous proposez, et le mettre en valeur.</p>
+    <h2>Notre format.</h2>
+  </div>
+  <div class="trio">
+    <div class="card g"><div class="vis"><img alt="Interview filmée" src="{{img:v11}}"></div><div class="stack"><p class="s">L’échange</p><p class="x">Vous nous parlez de votre projet et de ce que vous préparez pour les fêtes.</p></div></div>
+    <div class="card y"><div class="vis"><img alt="Tournage dans l’atelier" src="{{img:a12:900}}" style="object-position:40% 50%"></div><div class="stack"><p class="s">L’immersion</p><p class="x">On vous filme en action, sans bloquer votre journée.</p></div></div>
+    <div class="card b"><div class="vis mock"><figure class="fx fx-tel fx-reel" style="width:11cqw"><div class="fx-b"><div class="fx-in"><img alt="Vidéo sous-titrée" src="{{img:a01}}"></div></div></figure></div><div class="stack"><p class="s">Les livrables</p><p class="x">Dix vidéos de plus d’une minute, montées et sous-titrées, prêtes à publier.</p></div></div>
+  </div>
+</div></section>
+
+<!-- 3. Les cinq vidéos pour les fêtes (photos : Mélissa Beynet, Atelier Symbiose) -->
+<section class="page side5"><div class="in">
+  <div class="card b between lead">
+    <p class="s">Cinq vidéos pour faire découvrir ce que vous préparez.</p>
+    <h2>Pour les fêtes.</h2>
+  </div>
+  <div class="card g pic"><div class="vis"><img alt="Mélissa Beynet prépare une toile" src="{{img:m2:800}}" style="object-position:50% 50%"></div><div class="stack"><p class="s">Votre nouveauté</p><p class="x">Ce que vous lancez pour les fêtes, présenté par vous.</p></div></div>
+  <div class="card y pic"><div class="vis"><img alt="Mélissa Beynet face caméra" src="{{img:v11}}" style="object-position:50% 50%"></div><div class="stack"><p class="s">Votre offre ou votre promo</p><p class="x">Expliquée simplement, face caméra, pour qu’on la comprenne tout de suite.</p></div></div>
+  <div class="card b pic"><div class="vis"><img alt="Mélissa Beynet tient une de ses créations" src="{{img:m4:800}}" style="object-position:50% 60%"></div><div class="stack"><p class="s">Vos idées cadeaux</p><p class="x">Un produit, une séance, un bon cadeau&nbsp;: ce qu’on peut offrir grâce à vous.</p></div></div>
+  <div class="card g pic"><div class="vis"><img alt="Mélissa Beynet avec une cliente dans l’atelier" src="{{img:m3:900}}" style="object-position:42% 50%"></div><div class="stack"><p class="s">Les infos pratiques</p><p class="x">Horaires, dates limites, comment commander ou réserver.</p></div></div>
+  <div class="card y pic"><div class="vis"><img alt="Portrait de Mélissa Beynet dans son atelier" src="{{img:m5:900}}" style="object-position:47% 40%"></div><div class="stack"><p class="s">Votre message de fin d’année</p><p class="x">Un merci à vos clients et ce qui les attend en janvier.</p></div></div>
+</div></section>
+
+<!-- 4. Les cinq vidéos sur l'activité -->
+<section class="page side"><div class="in">
+  <div class="card g">
+    <span class="label">Cinq vidéos</span>
+    <div class="stack end">
+      <h2>Pour votre activité.</h2>
+      <p class="x">Elles servent bien après les fêtes.</p>
+    </div>
+    <div class="side-ph"><img alt="" src="{{img:a04:900}}"></div>
+  </div>
+  <div class="card y"><div class="list">
+    <div class="row"><span class="n">06</span><p class="t">Vous, derrière le projet</p><p class="d">Votre déclic, votre parcours, ce qui vous motive. On préfère soutenir une vraie personne.</p></div>
+    <div class="row"><span class="n">07</span><p class="t">Votre méthode, pas à pas</p><p class="d">Vos gestes, vos outils. Le client voit comment ça se passe avant d’acheter.</p></div>
+    <div class="row"><span class="n">08</span><p class="t">Ce qui vous rend différent</p><p class="d">Le problème que vous réglez et le résultat. Votre argumentaire, prêt à envoyer.</p></div>
+    <div class="row"><span class="n">09</span><p class="t">Les coulisses et la qualité</p><p class="d">Les matières, les gestes, les finitions. La valeur de votre travail se voit.</p></div>
+    <div class="row"><span class="n">10</span><p class="t">L’accueil, pour rassurer</p><p class="d">Comment vous recevez vos clients. Pour ceux qui hésitent à pousser la porte.</p></div>
+  </div></div>
+</div></section>
+
+<!-- 5. Instagram -->
+<section class="page side"><div class="in">
+  <div class="card b between">
+    <span class="label">Sur votre compte</span>
+    <div class="stack">
+      <h2 class="sm">Tout ce que vous préparez pour les fêtes, en vidéo.</h2>
+      <p class="x">Votre offre et votre activité, visibles dès qu’on ouvre votre profil.</p>
+    </div>
+  </div>
+  <div class="card g"><div class="duo-tel">
+    <figure class="fx fx-tel fx-profil" style="width:19cqw"><div class="fx-b"><div class="fx-in"><div class="fx-ig">
+      <div class="fx-user"><div class="fx-t">votre_compte</div></div>
+      <div class="fx-row"><div class="fx-av"></div><div class="fx-stats"><div><div class="fx-t"><b>128</b></div><span>publications</span></div><div><div class="fx-t"><b>1 240</b></div><span>followers</span></div><div><div class="fx-t"><b>312</b></div><span>suivi(e)s</span></div></div></div>
+      <div class="fx-t fx-name">Votre activité</div><div class="fx-t fx-bio">Nos nouveautés et nos offres pour les fêtes</div>
+      <div class="fx-btns"><span>Suivre</span><span>Message</span></div>
+      <div class="fx-tabs">{{ICO_TABS}}</div>
+      <div class="fx-grid">{{TILES}}</div>
+    </div></div></div></figure>
+    <figure class="fx fx-tel fx-reel" style="width:17cqw"><div class="fx-b"><div class="fx-in"><img alt="Caroline Dinet au travail" src="{{img:a06}}"><div class="fx-ui"><div class="fx-top">Reels</div><div class="fx-side">{{ICO_SIDE}}</div><div class="fx-bot"><div class="fx-who"><div class="fx-av"></div><div class="fx-t">votre_compte</div></div><div class="fx-t fx-cap">Notre offre des fêtes, expliquée en une minute</div></div></div></div></div></figure>
+  </div></div>
+</div></section>
+
+<!-- 6. Qui nous sommes -->
+<section class="page side"><div class="in">
+  <div class="card g between"><div class="logo" role="img" aria-label="Studio Récitales"></div><h2>Qui nous sommes.</h2></div>
+  <div class="card y center">
+    <figure class="fx fx-nav" style="width:58cqw"><div class="fx-b"><div class="fx-hd"><i></i><i></i><i></i><div class="fx-t fx-url">studiorecitales.fr</div></div><div class="fx-in"><img alt="Page d’accueil du site Studio Récitales" src="{{img:v06}}" style="object-position:50% 0"></div></div></figure>
+  </div>
+</div></section>
+
+<!-- 7. Nos services -->
+<section class="page side"><div class="in">
+  <div class="card y between"><span></span><h2>Nos services.</h2></div>
+  <div class="card b center">
+    <figure class="fx fx-nav" style="width:58cqw"><div class="fx-b"><div class="fx-hd"><i></i><i></i><i></i><div class="fx-t fx-url">studiorecitales.fr/services</div></div><div class="fx-in"><img alt="Page services du site Studio Récitales" src="{{img:v07}}" style="object-position:50% 0"></div></div></figure>
+  </div>
+</div></section>
+
+<!-- 8. Nos réalisations -->
+<section class="page side"><div class="in">
+  <div class="card b between"><span></span><h2>Nos réalisations.</h2></div>
+  <div class="trio">
+    <div class="card g real"><div class="vis"><img alt="Samuel Perraro" src="{{img:v08}}"></div><div class="stack"><p class="s">Samuel Perraro</p><p class="x">Céramiste</p></div></div>
+    <div class="card y real"><div class="vis"><img alt="Atelier Symbiose" src="{{img:v09}}"></div><div class="stack"><p class="s">Atelier Symbiose</p><p class="x">Mélissa Beynet<br>Tufting, Marseille</p></div></div>
+    <div class="card b real"><div class="vis"><img alt="Caroline Dinet" src="{{img:v10}}"></div><div class="stack"><p class="s">Caroline Dinet</p><p class="x">Lambesc<br>Restauration d’œuvres</p></div></div>
+  </div>
+</div></section>
+
+<!-- 9. L'offre en résumé -->
+<section class="page side sum"><div class="in">
+  <div class="card g between"><div class="logo" role="img" aria-label="Studio Récitales"></div><h2>L’offre en résumé.</h2></div>
+  <div class="trio">
+    <div class="card y"><span class="label">Offre Découverte</span><div class="stack end"><p class="s">Dix vidéos.</p><p class="x">Cinq pour les fêtes, cinq pour votre activité.</p></div></div>
+    <div class="card b"><div class="stack end"><p class="s price">100&nbsp;€</p><p class="s">Deux heures chez vous.</p><p class="x">Déplacement inclus.</p></div></div>
+    <div class="card g"><div class="stack end"><p class="contact">Studio Récitales<br><a href="tel:+33675146871">06 75 14 68 71</a><br><a href="mailto:hello@studiorecitales.fr">hello@studiorecitales.fr</a><br><a href="https://www.studiorecitales.fr/">studiorecitales.fr</a></p><a class="btn" href="mailto:hello@studiorecitales.fr?subject=Offre%20D%C3%A9couverte%20f%C3%AAtes">Réserver mon tournage</a></div></div>
+  </div>
+</div></section>
+
+</body></html>

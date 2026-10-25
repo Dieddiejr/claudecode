@@ -1,0 +1,8 @@
+{
+  "name": "outils-propositions-recitales",
+  "private": true,
+  "description": "Outils de vérification et d'export des propositions Studio Récitales",
+  "dependencies": {
+    "playwright": "1.48.2"
+  }
+}
